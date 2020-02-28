@@ -1,0 +1,169 @@
+﻿@using Negocio.Modelo;
+@{
+    ViewBag.Titulo = "Ver Empleados";
+}
+
+<div class="row justify-content-center">
+    <div class="col-sm-12 col-md-10">
+        <h2>Lista de empleados</h2>
+        <table class="table table-sm table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">T.Documento</th>
+                    <th scope="col">N.Documento</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Cargo</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{var empleados = (List<Empleado>)ViewBag.Empleados; }
+                @foreach (var empleado in empleados) {
+                    Console.WriteLine(empleado.Id);
+                    <tr>
+                        <td>@empleado.PERSONAS.Nombres</td>
+                        <td>@empleado.PERSONAS.Apellidos</td>
+                        <td>@empleado.PERSONAS.TIPOSDOCUMENTO.NombreCorto</td>
+                        <td>@empleado.PERSONAS.NumeroDocumento</td>
+                        <td>@empleado.PERSONAS.GENEROS.Nombre</td>
+                        <td>@empleado.ROLES.Nombre</td>
+                        <td>@empleado.Telefono</td>
+                        <td>@empleado.Correo</td>
+                        @{
+                            var atributosEditar = new Dictionary<string, object> {
+                                        {"class", "btn btn-primary" }
+                            };
+                        }
+                        @{
+                            var atributosEliminar = new Dictionary<string, object> {
+                                        {"class", "btn btn-danger" }
+                            };
+                        }
+                        <td>
+                            <button type="button" class="btn btn-primary boton-editar-empleado" id="boton-editar-empleado-@empleado.Id" data-toggle="modal" data-target="#modaEditarEmpleado">
+                                Editar
+                            </button>
+                            @Html.ActionLink(
+             "Eliminar",
+             "EliminarEmpleado",
+             "Administrar",
+             new {
+                 empleado = empleado.Id
+             },
+             atributosEliminar
+         )
+                        </td>
+                    </tr>
+                            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modaEditarEmpleado" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Editar Empleado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <form class="col-sm-10 col-md-12" action="@Url.Action("RegistrarEmpleado", "Administrar")" method="post">
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="primer-nombre">Nombres</label>
+                                    <input type="text" required name="Nombres" class="form-control" id="Nombres">
+                                </div>
+
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="apellidos">Apellidos</label>
+                                    <input type="text" required name="Apellidos" class="form-control" id="Apellidos">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="genero">Género</label>
+                                    @{ var generos = (List<Genero>)ViewBag.Generos; }
+                                    <select class="custom-select" required name="generos">
+                                        @foreach (var genero in generos) {
+                                            <option value="@genero.Id">@genero.Nombre</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="tipoDoc">Tipo de Documento</label>
+                                    @{ var tiposDocumento = (List<TipoDocumento>)ViewBag.TiposDocumento; }
+                                    <select class="custom-select" required name="tiposdeDocumento">
+                                        @foreach (var tipoDocumento in tiposDocumento) {
+                                            <option value="@tipoDocumento.Id">@tipoDocumento.NombreLargo</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="rol">Cargo</label>
+                                    @{ var roles = (List<Rol>)ViewBag.Roles; }
+                                    <select class="custom-select" required name="roles">
+                                        @foreach (var rol in roles) {
+                                            <option value="@rol.Id">@rol.Nombre</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="telefono">Número de Documento</label>
+                                    <input type="number" required name="numeroDocumento" class="form-control" id="numDoc">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="telefono">F.Contratación</label>
+                                    <input type="date" required name="fechaContratacion" class="form-control" id="telefono">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="telefono">Teléfono</label>
+                                    <input type="text" required name="telefono" class="form-control" id="telefono">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="telefono">Salario</label>
+                                    <input type="number" required name="salario" class="form-control" id="telefono">
+                                </div>
+
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="exampleInputEmail1">Correo Electrónico</label>
+                                    <input type="email" required name="correo" class="form-control" id="exampleInputEmail1">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label for="exampleInputEmail1">Contraseña</label>
+                                    <input type="password" required name="clave" class="form-control" id="exampleInputEmail1">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    @{
+        var empleados2 = new List<Negocio.Modelo2.Empleado>();
+        foreach(var empleado in empleados) {
+            var empleado2 = new Negocio.Modelo2.Empleado(empleado);
+            empleados2.Add(empleado2);
+        }
+        var jsonEmpleados = Newtonsoft.Json.JsonConvert.SerializeObject(empleados2);
+    }
+    var jsonEmpleados = @jsonEmpleados;
+    var empleados = JSON.parse(jsonEmpleados);
+</script>

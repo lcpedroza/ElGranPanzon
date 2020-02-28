@@ -1,0 +1,165 @@
+﻿@using Compartido.Modelo;
+@{
+    ViewBag.Titulo = "Inicio";
+}
+
+<div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8">
+            @if (TempData["Mensaje"] != null) {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"]
+                </div>
+            }
+            <form class="row justify-content-center" action="@Url.Action("Compras", "Inicio")" method="post">
+                <div class="form-group col-sm-12 col-md-4">
+                    <label for="genero">Ligas</label>
+                    @{ var ligas = (List<Liga>)ViewBag.Ligas; }
+                    <select class="custom-select" name="liga">
+                        <option value="">Seleccione una liga</option>
+                        @foreach (var liga in ligas) {
+                            if (liga.Id == ViewBag.LigaId) {
+                                <option value="@liga.Id" selected>@liga.Ligas1</option>
+                            } else {
+                                <option value="@liga.Id">@liga.Ligas1</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-sm-12 col-md-4">
+                    <label for="genero">Tallas</label>
+                    @{ var tallas = (List<Talla>)ViewBag.Tallas; }
+                    <select class="custom-select" name="talla">
+                        <option value="">Seleccione una talla</option>
+                        @foreach (var talla in tallas) {
+                            if (talla.Id == ViewBag.TallaId) {
+                                <option value="@talla.Id" selected>@talla.NombreCorto</option>
+                            } else {
+                                <option value="@talla.Id">@talla.NombreCorto</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-sm-12 col-md-4">
+                    <label for="genero">Géneros</label>
+                    @{ var generos = (List<Genero>)ViewBag.Generos; }
+                    <select class="custom-select" name="genero">
+                        <option value="">Seleccione un género</option>
+                        @foreach (var genero in generos) {
+                            if (genero.Id == ViewBag.GeneroId) {
+                                <option value="@genero.Id" selected>@genero.Nombre</option>
+                            } else {
+                                <option value="@genero.Id">@genero.Nombre</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </form>
+        </div>
+    </div>
+    <br><br>
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-10">
+            @{var tarjetasCamiseta = (List<TarjetaCamiseta>)ViewBag.TarjetasCamiseta; }
+            <div class="row">
+                @foreach (var tarjetaCamiseta in tarjetasCamiseta) {
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <form action="@Url.Action("SeleccionarProducto", "Inicio")" method="post">
+                            <div class="card">
+                                <img src="@Url.Content("~/Content/Images/" + tarjetaCamiseta.NombreEquipo + ".jpg")" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Equipo: @tarjetaCamiseta.NombreEquipo </li>
+                                        <li class="list-group-item">Género: @tarjetaCamiseta.NombreGenero</li>
+                                        <li class="list-group-item">Talla: @tarjetaCamiseta.NombreTalla</li>
+                                        <li class="list-group-item">Precio: @tarjetaCamiseta.Precio</li>
+                                    </ul>
+                                    <div class="row justify-content-center">
+                                        <input type="hidden" value="@ViewBag.LigaId" name="ligaId">
+                                        <input type="hidden" value="@tarjetaCamiseta.CamisetaId" name="camisetaId">
+                                        <input type="hidden" value="@ViewBag.TallaId" name="tallaId">
+                                        <input type="hidden" value="@ViewBag.GeneroId" name="generoId">
+                                        <input type="hidden" value="@tarjetaCamiseta.Precio" name="precio">
+                                        <div class="col-sm-12 col-md-6">
+                                            <label>Cantidad a comprar</label>
+                                        </div>
+                                        <div class="col-sm-12 col-md-3">
+                                            <input type="number" required min="0" name="cantidad" class="form-control">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Seleccionar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#carrito">
+    Ir al carrito de compras
+</button>
+
+<div class="modal" tabindex="-1" role="dialog" id="carrito">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="justify-content-center">
+                    <h5 class="modal-title">Carrito de compras</h5>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-md-10">
+                        <table class="table table-sm table-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Género</th>
+                                    <th scope="col">Talla</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Subtotal</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @{var factura = (Factura)Session["factura"]; }
+                                @{var detallesFactura = factura.DetallesFactura; }
+                                @foreach (var df in detallesFactura) {
+                                    <tr>
+                                        <td>@df.Camisetas.NombreEquipo</td>
+                                        <td>@df.Generos.Nombre</td>
+                                        <td>@df.Tallas.NombreCorto</td>
+                                        <td>@df.Cantidad</td>
+                                        <td>@df.Precio</td>
+                                        <td>@df.Subtotal</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Total: @factura.TotalCompra()</li>
+                            <li class="list-group-item">Enviar a: @factura.Cliente.Nombres @factura.Cliente.Apellidos</li>
+                            <li class="list-group-item">Dirección: @factura.Cliente.Direccion </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                @{
+                    var atributosNavLink = new Dictionary<string, object> {
+                                    {"class", "btn btn-primary" }
+                        };
+                }
+                @Html.ActionLink("Comprar", "RealizarCompra", "Inicio", null, atributosNavLink)
+            </div>
+        </div>
+    </div>
+</div>

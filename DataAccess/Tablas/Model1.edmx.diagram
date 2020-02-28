@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="301a02ec1333497b955295c90db2a4bd" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.CategoriaComida" Width="1.5" PointX="5.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CategoriaInsumo" Width="1.5" PointX="5.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Cliente" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Comida" Width="1.5" PointX="8" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DetalleFactura" Width="1.5" PointX="10.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Empleado" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Factura" Width="1.5" PointX="8" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Genero" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Insumo" Width="1.5" PointX="8" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Inventario" Width="1.5" PointX="10.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Permiso" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Persona" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Rol" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Sede" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoDocumento" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ComidaInsumo" Width="1.5" PointX="10.25" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="Model.COMCATCOM" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PROCAT" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.CLIPER" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.COMINSCOM" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.DETCOM" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.DETFAC" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FACSED" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.EMPPER" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.EMPROL" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.EMPSED" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.EMPGEN" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.COMINSINS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.INVINS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.INVSED" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.EMPTIP" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PERMISOSROLES" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.RELACIONDEROLES" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

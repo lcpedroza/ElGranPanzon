@@ -1,0 +1,59 @@
+﻿@using Negocio.Modelo;
+@{
+    ViewBag.Titulo = "Registro";
+}
+
+
+<div class="container">
+    <h1> Restaurante El Gran Panzón</h1>
+
+    <div class="row justify-content-center">
+        <form class="col-sm-10 col-md-6" action="@Url.Action("RegistrarCliente", "Home")" method="post">
+            <h3>Registro de cliente</h3>
+            <div class="row">
+                <div class="form-group col-sm-12 col-md-6">
+                    <label for="primer-nombre">Nombres</label>
+                    <input type="text" required name="Nombres" class="form-control" id="Nombres" placeholder="Nombres">
+                </div>
+
+                <div class="form-group col-sm-12 col-md-6">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" required name="Apellidos" class="form-control" id="Apellidos" placeholder="Apellidos">
+                </div>
+                <div class="form-group col-sm-12 col-md-6">
+                    <label for="genero">Género</label>
+                    @{ var generos = (List<Genero>)ViewBag.Generos; }
+                    <select class="custom-select" required name="generos">
+                        <option value="">Seleccione un género</option>
+                        @foreach (var genero in generos) {
+                            <option value="@genero.Id">@genero.Nombre</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-sm-12 col-md-6">
+                    <label for="tipoDoc">Tipo de Documento</label>
+                    @{ var tiposDocumento = (List<TiposDocumento>)ViewBag.TiposDocumento; }
+                    <select class="custom-select" required name="tiposdeDocumento">
+                        <option value="">Seleccione un tipo de documento</option>
+                        @foreach (var tipoDocumento in tiposDocumento) {
+                            <option value="@tipoDocumento.Id">@tipoDocumento.NombreLargo</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-sm-12 col-md-6">
+                    <label for="telefono">Número de Documento</label>
+                    <input type="text" required name="numeroDocumento" class="form-control" id="numDoc" placeholder="Número de Documento">
+                </div>
+                <div class="form-group col-sm-12 col-md-6">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" required name="telefono" class="form-control" id="telefono" placeholder="Teléfono">
+                </div>
+                <div class="form-group col-sm-12 col-md-6">
+                    <label for="exampleInputEmail1">Correo Electrónico</label>
+                    <input type="email" required name="correo" class="form-control" id="exampleInputEmail1" placeholder="Correo Electrónico">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar datos</button>
+        </form>
+    </div>
+</div> 

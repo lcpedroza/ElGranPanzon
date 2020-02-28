@@ -1,0 +1,1174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CATEGORIASCOMIDAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATEGORIASINSUMOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PERSONAID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar2" MaxLength="14" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'LUIS.COMIDAINSUMOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="COMIDAINSUMOS">
+          <Key>
+            <PropertyRef Name="COMIDAID" />
+            <PropertyRef Name="INSUMOID" />
+            <PropertyRef Name="CANTIDAD" />
+          </Key>
+          <Property Name="COMIDAID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="INSUMOID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD" Type="float" Precision="126" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMIDAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="PRECIO" Type="float" Precision="126" Scale="0" Nullable="false" />
+          <Property Name="CATEGORIAID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLEFACTURAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FACTURAID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COMIDAID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SEDEID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PRECIO" Type="float" Precision="126" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PERSONAID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FECHACONTRATACION" Type="date" Nullable="false" />
+          <Property Name="FECHACREACION" Type="date" Nullable="false" />
+          <Property Name="SALARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROLID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="CLAVE" Type="varchar2" MaxLength="32" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar2" MaxLength="14" Nullable="false" />
+          <Property Name="SEDEID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACTURAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CLIENTEID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TOTAL" Type="float" Precision="126" Scale="0" Nullable="false" />
+          <Property Name="FECHACREACION" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GENEROS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INSUMOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="CATEGORIAID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="UNIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MARCA" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="PROVEEDOR" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="PRECIO" Type="float" Precision="126" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INVENTARIOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INSUMOID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SEDEID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FECHACREACION" Type="date" Nullable="false" />
+          <Property Name="MOVIMIENTOCANTIDAD" Type="float" Precision="126" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERMISOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="CODIGO" Type="varchar2" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERMISOSROLES">
+          <Key>
+            <PropertyRef Name="ROLID" />
+            <PropertyRef Name="PERMISOID" />
+          </Key>
+          <Property Name="ROLID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PERMISOID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERSONAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRES" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="APELLIDOS" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="GENEROID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPODOCUMENTOID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NUMERODOCUMENTO" Type="varchar2" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RELACIONDEROLES">
+          <Key>
+            <PropertyRef Name="ROLPADREID" />
+            <PropertyRef Name="ROLHIJOID" />
+          </Key>
+          <Property Name="ROLPADREID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROLHIJOID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SEDES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar2" MaxLength="14" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPOSDOCUMENTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRELARGO" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="NOMBRECORTO" Type="varchar2" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <Association Name="CLIPER">
+          <End Role="PERSONAS" Type="Self.PERSONAS" Multiplicity="1" />
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONAS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTES">
+              <PropertyRef Name="PERSONAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMCATCOM">
+          <End Role="CATEGORIASCOMIDAS" Type="Self.CATEGORIASCOMIDAS" Multiplicity="1" />
+          <End Role="COMIDAS" Type="Self.COMIDAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIASCOMIDAS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="COMIDAS">
+              <PropertyRef Name="CATEGORIAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMINSCOM">
+          <End Role="COMIDAS" Type="Self.COMIDAS" Multiplicity="1" />
+          <End Role="COMIDAINSUMOS" Type="Self.COMIDAINSUMOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMIDAS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="COMIDAINSUMOS">
+              <PropertyRef Name="COMIDAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMINSINS">
+          <End Role="INSUMOS" Type="Self.INSUMOS" Multiplicity="1" />
+          <End Role="COMIDAINSUMOS" Type="Self.COMIDAINSUMOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSUMOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="COMIDAINSUMOS">
+              <PropertyRef Name="INSUMOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETCOM">
+          <End Role="COMIDAS" Type="Self.COMIDAS" Multiplicity="1" />
+          <End Role="DETALLEFACTURAS" Type="Self.DETALLEFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMIDAS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DETALLEFACTURAS">
+              <PropertyRef Name="COMIDAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETFAC">
+          <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="1" />
+          <End Role="DETALLEFACTURAS" Type="Self.DETALLEFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURAS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DETALLEFACTURAS">
+              <PropertyRef Name="FACTURAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPGEN">
+          <End Role="GENEROS" Type="Self.GENEROS" Multiplicity="1" />
+          <End Role="PERSONAS" Type="Self.PERSONAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENEROS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PERSONAS">
+              <PropertyRef Name="GENEROID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPPER">
+          <End Role="PERSONAS" Type="Self.PERSONAS" Multiplicity="1" />
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONAS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMPLEADOS">
+              <PropertyRef Name="PERSONAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPROL">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMPLEADOS">
+              <PropertyRef Name="ROLID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPSED">
+          <End Role="SEDES" Type="Self.SEDES" Multiplicity="1" />
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMPLEADOS">
+              <PropertyRef Name="SEDEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPTIP">
+          <End Role="TIPOSDOCUMENTO" Type="Self.TIPOSDOCUMENTO" Multiplicity="1" />
+          <End Role="PERSONAS" Type="Self.PERSONAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOSDOCUMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PERSONAS">
+              <PropertyRef Name="TIPODOCUMENTOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FACSED">
+          <End Role="SEDES" Type="Self.SEDES" Multiplicity="1" />
+          <End Role="DETALLEFACTURAS" Type="Self.DETALLEFACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DETALLEFACTURAS">
+              <PropertyRef Name="SEDEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="INVINS">
+          <End Role="INSUMOS" Type="Self.INSUMOS" Multiplicity="1" />
+          <End Role="INVENTARIOS" Type="Self.INVENTARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSUMOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INVENTARIOS">
+              <PropertyRef Name="INSUMOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="INVSED">
+          <End Role="SEDES" Type="Self.SEDES" Multiplicity="1" />
+          <End Role="INVENTARIOS" Type="Self.INVENTARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INVENTARIOS">
+              <PropertyRef Name="SEDEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PERMISOSROLESPER">
+          <End Role="PERMISOS" Type="Self.PERMISOS" Multiplicity="1" />
+          <End Role="PERMISOSROLES" Type="Self.PERMISOSROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERMISOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PERMISOSROLES">
+              <PropertyRef Name="PERMISOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PERROLESROL">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="PERMISOSROLES" Type="Self.PERMISOSROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PERMISOSROLES">
+              <PropertyRef Name="ROLID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROCAT">
+          <End Role="CATEGORIASINSUMOS" Type="Self.CATEGORIASINSUMOS" Multiplicity="1" />
+          <End Role="INSUMOS" Type="Self.INSUMOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIASINSUMOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INSUMOS">
+              <PropertyRef Name="CATEGORIAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RELAROLESH">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="RELACIONDEROLES" Type="Self.RELACIONDEROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RELACIONDEROLES">
+              <PropertyRef Name="ROLHIJOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RELAROLESP">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="RELACIONDEROLES" Type="Self.RELACIONDEROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RELACIONDEROLES">
+              <PropertyRef Name="ROLPADREID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="CATEGORIASCOMIDAS" EntityType="Self.CATEGORIASCOMIDAS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="CATEGORIASINSUMOS" EntityType="Self.CATEGORIASINSUMOS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="COMIDAS" EntityType="Self.COMIDAS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="DETALLEFACTURAS" EntityType="Self.DETALLEFACTURAS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="FACTURAS" EntityType="Self.FACTURAS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="GENEROS" EntityType="Self.GENEROS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="INSUMOS" EntityType="Self.INSUMOS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="INVENTARIOS" EntityType="Self.INVENTARIOS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="PERMISOS" EntityType="Self.PERMISOS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="PERMISOSROLES" EntityType="Self.PERMISOSROLES" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="PERSONAS" EntityType="Self.PERSONAS" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="RELACIONDEROLES" EntityType="Self.RELACIONDEROLES" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="SEDES" EntityType="Self.SEDES" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="TIPOSDOCUMENTO" EntityType="Self.TIPOSDOCUMENTO" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="COMIDAINSUMOS" EntityType="Self.COMIDAINSUMOS" store:Type="Tables" store:Schema="LUIS">
+            <DefiningQuery>SELECT 
+"COMIDAINSUMOS"."COMIDAID" AS "COMIDAID", 
+"COMIDAINSUMOS"."INSUMOID" AS "INSUMOID", 
+"COMIDAINSUMOS"."CANTIDAD" AS "CANTIDAD"
+FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="CLIPER" Association="Self.CLIPER">
+            <End Role="PERSONAS" EntitySet="PERSONAS" />
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+          </AssociationSet>
+          <AssociationSet Name="COMCATCOM" Association="Self.COMCATCOM">
+            <End Role="CATEGORIASCOMIDAS" EntitySet="CATEGORIASCOMIDAS" />
+            <End Role="COMIDAS" EntitySet="COMIDAS" />
+          </AssociationSet>
+          <AssociationSet Name="COMINSCOM" Association="Self.COMINSCOM">
+            <End Role="COMIDAS" EntitySet="COMIDAS" />
+            <End Role="COMIDAINSUMOS" EntitySet="COMIDAINSUMOS" />
+          </AssociationSet>
+          <AssociationSet Name="COMINSINS" Association="Self.COMINSINS">
+            <End Role="INSUMOS" EntitySet="INSUMOS" />
+            <End Role="COMIDAINSUMOS" EntitySet="COMIDAINSUMOS" />
+          </AssociationSet>
+          <AssociationSet Name="DETCOM" Association="Self.DETCOM">
+            <End Role="COMIDAS" EntitySet="COMIDAS" />
+            <End Role="DETALLEFACTURAS" EntitySet="DETALLEFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="DETFAC" Association="Self.DETFAC">
+            <End Role="FACTURAS" EntitySet="FACTURAS" />
+            <End Role="DETALLEFACTURAS" EntitySet="DETALLEFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="EMPGEN" Association="Self.EMPGEN">
+            <End Role="GENEROS" EntitySet="GENEROS" />
+            <End Role="PERSONAS" EntitySet="PERSONAS" />
+          </AssociationSet>
+          <AssociationSet Name="EMPPER" Association="Self.EMPPER">
+            <End Role="PERSONAS" EntitySet="PERSONAS" />
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+          </AssociationSet>
+          <AssociationSet Name="EMPROL" Association="Self.EMPROL">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+          </AssociationSet>
+          <AssociationSet Name="EMPSED" Association="Self.EMPSED">
+            <End Role="SEDES" EntitySet="SEDES" />
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+          </AssociationSet>
+          <AssociationSet Name="EMPTIP" Association="Self.EMPTIP">
+            <End Role="TIPOSDOCUMENTO" EntitySet="TIPOSDOCUMENTO" />
+            <End Role="PERSONAS" EntitySet="PERSONAS" />
+          </AssociationSet>
+          <AssociationSet Name="FACSED" Association="Self.FACSED">
+            <End Role="SEDES" EntitySet="SEDES" />
+            <End Role="DETALLEFACTURAS" EntitySet="DETALLEFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="INVINS" Association="Self.INVINS">
+            <End Role="INSUMOS" EntitySet="INSUMOS" />
+            <End Role="INVENTARIOS" EntitySet="INVENTARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="INVSED" Association="Self.INVSED">
+            <End Role="SEDES" EntitySet="SEDES" />
+            <End Role="INVENTARIOS" EntitySet="INVENTARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="PERMISOSROLESPER" Association="Self.PERMISOSROLESPER">
+            <End Role="PERMISOS" EntitySet="PERMISOS" />
+            <End Role="PERMISOSROLES" EntitySet="PERMISOSROLES" />
+          </AssociationSet>
+          <AssociationSet Name="PERROLESROL" Association="Self.PERROLESROL">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="PERMISOSROLES" EntitySet="PERMISOSROLES" />
+          </AssociationSet>
+          <AssociationSet Name="PROCAT" Association="Self.PROCAT">
+            <End Role="CATEGORIASINSUMOS" EntitySet="CATEGORIASINSUMOS" />
+            <End Role="INSUMOS" EntitySet="INSUMOS" />
+          </AssociationSet>
+          <AssociationSet Name="RELAROLESH" Association="Self.RELAROLESH">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="RELACIONDEROLES" EntitySet="RELACIONDEROLES" />
+          </AssociationSet>
+          <AssociationSet Name="RELAROLESP" Association="Self.RELAROLESP">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="RELACIONDEROLES" EntitySet="RELACIONDEROLES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CategoriaComida">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="COMIDAS" Relationship="Self.COMCATCOM" FromRole="CATEGORIASCOMIDAS" ToRole="COMIDAS" />
+        </EntityType>
+        <EntityType Name="CategoriaInsumo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="INSUMOS" Relationship="Self.PROCAT" FromRole="CATEGORIASINSUMOS" ToRole="INSUMOS" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonaId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PERSONAS" Relationship="Self.CLIPER" FromRole="CLIENTES" ToRole="PERSONAS" />
+        </EntityType>
+        <EntityType Name="Comida">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CategoriaId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CATEGORIASCOMIDAS" Relationship="Self.COMCATCOM" FromRole="COMIDAS" ToRole="CATEGORIASCOMIDAS" />
+          <NavigationProperty Name="COMIDAINSUMOS" Relationship="Self.COMINSCOM" FromRole="COMIDAS" ToRole="COMIDAINSUMOS" />
+          <NavigationProperty Name="DETALLEFACTURAS" Relationship="Self.DETCOM" FromRole="COMIDAS" ToRole="DETALLEFACTURAS" />
+        </EntityType>
+        <EntityType Name="DetalleFactura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacturaId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ComidaId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SedeId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="Cantidad" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="COMIDAS" Relationship="Self.DETCOM" FromRole="DETALLEFACTURAS" ToRole="COMIDAS" />
+          <NavigationProperty Name="FACTURAS" Relationship="Self.DETFAC" FromRole="DETALLEFACTURAS" ToRole="FACTURAS" />
+          <NavigationProperty Name="SEDES" Relationship="Self.FACSED" FromRole="DETALLEFACTURAS" ToRole="SEDES" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonaId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FechaContratacion" Type="DateTime" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <Property Name="Salario" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RolId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clave" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SedeId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PERSONAS" Relationship="Self.EMPPER" FromRole="EMPLEADOS" ToRole="PERSONAS" />
+          <NavigationProperty Name="ROLES" Relationship="Self.EMPROL" FromRole="EMPLEADOS" ToRole="ROLES" />
+          <NavigationProperty Name="SEDES" Relationship="Self.EMPSED" FromRole="EMPLEADOS" ToRole="SEDES" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="DETALLEFACTURAS" Relationship="Self.DETFAC" FromRole="FACTURAS" ToRole="DETALLEFACTURAS" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PERSONAS" Relationship="Self.EMPGEN" FromRole="GENEROS" ToRole="PERSONAS" />
+        </EntityType>
+        <EntityType Name="Insumo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoriaId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="Unidad" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Proveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CATEGORIASINSUMOS" Relationship="Self.PROCAT" FromRole="INSUMOS" ToRole="CATEGORIASINSUMOS" />
+          <NavigationProperty Name="COMIDAINSUMOS" Relationship="Self.COMINSINS" FromRole="INSUMOS" ToRole="COMIDAINSUMOS" />
+          <NavigationProperty Name="INVENTARIOS" Relationship="Self.INVINS" FromRole="INSUMOS" ToRole="INVENTARIOS" />
+        </EntityType>
+        <EntityType Name="Inventario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InsumoId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SedeId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <Property Name="MovimientoCantidad" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="INSUMOS" Relationship="Self.INVINS" FromRole="INVENTARIOS" ToRole="INSUMOS" />
+          <NavigationProperty Name="SEDES" Relationship="Self.INVSED" FromRole="INVENTARIOS" ToRole="SEDES" />
+        </EntityType>
+        <EntityType Name="Permiso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ROLES" Relationship="Self.PERMISOSROLES" FromRole="PERMISOS" ToRole="ROLES" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GeneroId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TipoDocumentoId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NumeroDocumento" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CLIENTES" Relationship="Self.CLIPER" FromRole="PERSONAS" ToRole="CLIENTES" />
+          <NavigationProperty Name="EMPLEADOS" Relationship="Self.EMPPER" FromRole="PERSONAS" ToRole="EMPLEADOS" />
+          <NavigationProperty Name="GENEROS" Relationship="Self.EMPGEN" FromRole="PERSONAS" ToRole="GENEROS" />
+          <NavigationProperty Name="TIPOSDOCUMENTO" Relationship="Self.EMPTIP" FromRole="PERSONAS" ToRole="TIPOSDOCUMENTO" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EMPLEADOS" Relationship="Self.EMPROL" FromRole="ROLES" ToRole="EMPLEADOS" />
+          <NavigationProperty Name="PERMISOS" Relationship="Self.PERMISOSROLES" FromRole="ROLES" ToRole="PERMISOS" />
+          <NavigationProperty Name="ROLES1" Relationship="Self.RELACIONDEROLES" FromRole="ROLES" ToRole="ROLES1" />
+          <NavigationProperty Name="ROLES2" Relationship="Self.RELACIONDEROLES" FromRole="ROLES1" ToRole="ROLES" />
+        </EntityType>
+        <EntityType Name="Sede">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DETALLEFACTURAS" Relationship="Self.FACSED" FromRole="SEDES" ToRole="DETALLEFACTURAS" />
+          <NavigationProperty Name="EMPLEADOS" Relationship="Self.EMPSED" FromRole="SEDES" ToRole="EMPLEADOS" />
+          <NavigationProperty Name="INVENTARIOS" Relationship="Self.INVSED" FromRole="SEDES" ToRole="INVENTARIOS" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreLargo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreCorto" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PERSONAS" Relationship="Self.EMPTIP" FromRole="TIPOSDOCUMENTO" ToRole="PERSONAS" />
+        </EntityType>
+        <EntityType Name="ComidaInsumo">
+          <Key>
+            <PropertyRef Name="ComidaId" />
+            <PropertyRef Name="InsumoId" />
+            <PropertyRef Name="Cantidad" />
+          </Key>
+          <Property Name="ComidaId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="InsumoId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="Cantidad" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="COMIDAS" Relationship="Self.COMINSCOM" FromRole="COMIDAINSUMOS" ToRole="COMIDAS" />
+          <NavigationProperty Name="INSUMOS" Relationship="Self.COMINSINS" FromRole="COMIDAINSUMOS" ToRole="INSUMOS" />
+        </EntityType>
+        <Association Name="COMCATCOM">
+          <End Role="CATEGORIASCOMIDAS" Type="Model.CategoriaComida" Multiplicity="1" />
+          <End Role="COMIDAS" Type="Model.Comida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIASCOMIDAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COMIDAS">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROCAT">
+          <End Role="CATEGORIASINSUMOS" Type="Model.CategoriaInsumo" Multiplicity="1" />
+          <End Role="INSUMOS" Type="Model.Insumo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIASINSUMOS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="INSUMOS">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLIPER">
+          <End Role="PERSONAS" Type="Model.Persona" Multiplicity="1" />
+          <End Role="CLIENTES" Type="Model.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CLIENTES">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMINSCOM">
+          <End Role="COMIDAS" Type="Model.Comida" Multiplicity="1" />
+          <End Role="COMIDAINSUMOS" Type="Model.ComidaInsumo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMIDAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COMIDAINSUMOS">
+              <PropertyRef Name="ComidaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETCOM">
+          <End Role="COMIDAS" Type="Model.Comida" Multiplicity="1" />
+          <End Role="DETALLEFACTURAS" Type="Model.DetalleFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMIDAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DETALLEFACTURAS">
+              <PropertyRef Name="ComidaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETFAC">
+          <End Role="FACTURAS" Type="Model.Factura" Multiplicity="1" />
+          <End Role="DETALLEFACTURAS" Type="Model.DetalleFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DETALLEFACTURAS">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FACSED">
+          <End Role="SEDES" Type="Model.Sede" Multiplicity="1" />
+          <End Role="DETALLEFACTURAS" Type="Model.DetalleFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDES">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DETALLEFACTURAS">
+              <PropertyRef Name="SedeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPPER">
+          <End Role="PERSONAS" Type="Model.Persona" Multiplicity="1" />
+          <End Role="EMPLEADOS" Type="Model.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EMPLEADOS">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPROL">
+          <End Role="ROLES" Type="Model.Rol" Multiplicity="1" />
+          <End Role="EMPLEADOS" Type="Model.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EMPLEADOS">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPSED">
+          <End Role="SEDES" Type="Model.Sede" Multiplicity="1" />
+          <End Role="EMPLEADOS" Type="Model.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDES">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EMPLEADOS">
+              <PropertyRef Name="SedeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPGEN">
+          <End Role="GENEROS" Type="Model.Genero" Multiplicity="1" />
+          <End Role="PERSONAS" Type="Model.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENEROS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PERSONAS">
+              <PropertyRef Name="GeneroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMINSINS">
+          <End Role="INSUMOS" Type="Model.Insumo" Multiplicity="1" />
+          <End Role="COMIDAINSUMOS" Type="Model.ComidaInsumo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSUMOS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COMIDAINSUMOS">
+              <PropertyRef Name="InsumoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="INVINS">
+          <End Role="INSUMOS" Type="Model.Insumo" Multiplicity="1" />
+          <End Role="INVENTARIOS" Type="Model.Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSUMOS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="INVENTARIOS">
+              <PropertyRef Name="InsumoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="INVSED">
+          <End Role="SEDES" Type="Model.Sede" Multiplicity="1" />
+          <End Role="INVENTARIOS" Type="Model.Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDES">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="INVENTARIOS">
+              <PropertyRef Name="SedeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPTIP">
+          <End Role="TIPOSDOCUMENTO" Type="Model.TipoDocumento" Multiplicity="1" />
+          <End Role="PERSONAS" Type="Model.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOSDOCUMENTO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PERSONAS">
+              <PropertyRef Name="TipoDocumentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PERMISOSROLES">
+          <End Role="PERMISOS" Type="Model.Permiso" Multiplicity="*" />
+          <End Role="ROLES" Type="Model.Rol" Multiplicity="*" />
+        </Association>
+        <Association Name="RELACIONDEROLES">
+          <End Role="ROLES" Type="Model.Rol" Multiplicity="*" />
+          <End Role="ROLES1" Type="Model.Rol" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entidades" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategoriasComidas" EntityType="Model.CategoriaComida" />
+          <EntitySet Name="CategoriasInsumos" EntityType="Model.CategoriaInsumo" />
+          <EntitySet Name="Clientes" EntityType="Model.Cliente" />
+          <EntitySet Name="Comidas" EntityType="Model.Comida" />
+          <EntitySet Name="DetallesFactura" EntityType="Model.DetalleFactura" />
+          <EntitySet Name="Empleados" EntityType="Model.Empleado" />
+          <EntitySet Name="Facturas" EntityType="Model.Factura" />
+          <EntitySet Name="Generos" EntityType="Model.Genero" />
+          <EntitySet Name="Insumos" EntityType="Model.Insumo" />
+          <EntitySet Name="Inventarios" EntityType="Model.Inventario" />
+          <EntitySet Name="Permisos" EntityType="Model.Permiso" />
+          <EntitySet Name="Personas" EntityType="Model.Persona" />
+          <EntitySet Name="Roles" EntityType="Model.Rol" />
+          <EntitySet Name="Sedes" EntityType="Model.Sede" />
+          <EntitySet Name="TiposDocumento" EntityType="Model.TipoDocumento" />
+          <EntitySet Name="ComidaInsumos" EntityType="Model.ComidaInsumo" />
+          <AssociationSet Name="COMCATCOM" Association="Self.COMCATCOM">
+            <End Role="CATEGORIASCOMIDAS" EntitySet="CategoriasComidas" />
+            <End Role="COMIDAS" EntitySet="Comidas" />
+          </AssociationSet>
+          <AssociationSet Name="PROCAT" Association="Self.PROCAT">
+            <End Role="CATEGORIASINSUMOS" EntitySet="CategoriasInsumos" />
+            <End Role="INSUMOS" EntitySet="Insumos" />
+          </AssociationSet>
+          <AssociationSet Name="CLIPER" Association="Self.CLIPER">
+            <End Role="PERSONAS" EntitySet="Personas" />
+            <End Role="CLIENTES" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="COMINSCOM" Association="Self.COMINSCOM">
+            <End Role="COMIDAS" EntitySet="Comidas" />
+            <End Role="COMIDAINSUMOS" EntitySet="ComidaInsumos" />
+          </AssociationSet>
+          <AssociationSet Name="DETCOM" Association="Self.DETCOM">
+            <End Role="COMIDAS" EntitySet="Comidas" />
+            <End Role="DETALLEFACTURAS" EntitySet="DetallesFactura" />
+          </AssociationSet>
+          <AssociationSet Name="DETFAC" Association="Self.DETFAC">
+            <End Role="FACTURAS" EntitySet="Facturas" />
+            <End Role="DETALLEFACTURAS" EntitySet="DetallesFactura" />
+          </AssociationSet>
+          <AssociationSet Name="FACSED" Association="Self.FACSED">
+            <End Role="SEDES" EntitySet="Sedes" />
+            <End Role="DETALLEFACTURAS" EntitySet="DetallesFactura" />
+          </AssociationSet>
+          <AssociationSet Name="EMPPER" Association="Self.EMPPER">
+            <End Role="PERSONAS" EntitySet="Personas" />
+            <End Role="EMPLEADOS" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="EMPROL" Association="Self.EMPROL">
+            <End Role="ROLES" EntitySet="Roles" />
+            <End Role="EMPLEADOS" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="EMPSED" Association="Self.EMPSED">
+            <End Role="SEDES" EntitySet="Sedes" />
+            <End Role="EMPLEADOS" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="EMPGEN" Association="Self.EMPGEN">
+            <End Role="GENEROS" EntitySet="Generos" />
+            <End Role="PERSONAS" EntitySet="Personas" />
+          </AssociationSet>
+          <AssociationSet Name="COMINSINS" Association="Self.COMINSINS">
+            <End Role="INSUMOS" EntitySet="Insumos" />
+            <End Role="COMIDAINSUMOS" EntitySet="ComidaInsumos" />
+          </AssociationSet>
+          <AssociationSet Name="INVINS" Association="Self.INVINS">
+            <End Role="INSUMOS" EntitySet="Insumos" />
+            <End Role="INVENTARIOS" EntitySet="Inventarios" />
+          </AssociationSet>
+          <AssociationSet Name="INVSED" Association="Self.INVSED">
+            <End Role="SEDES" EntitySet="Sedes" />
+            <End Role="INVENTARIOS" EntitySet="Inventarios" />
+          </AssociationSet>
+          <AssociationSet Name="EMPTIP" Association="Self.EMPTIP">
+            <End Role="TIPOSDOCUMENTO" EntitySet="TiposDocumento" />
+            <End Role="PERSONAS" EntitySet="Personas" />
+          </AssociationSet>
+          <AssociationSet Name="PERMISOSROLES" Association="Self.PERMISOSROLES">
+            <End Role="PERMISOS" EntitySet="Permisos" />
+            <End Role="ROLES" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="RELACIONDEROLES" Association="Self.RELACIONDEROLES">
+            <End Role="ROLES" EntitySet="Roles" />
+            <End Role="ROLES1" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entidades">
+          <EntitySetMapping Name="CategoriasComidas">
+            <EntityTypeMapping TypeName="Model.CategoriaComida">
+              <MappingFragment StoreEntitySet="CATEGORIASCOMIDAS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriasInsumos">
+            <EntityTypeMapping TypeName="Model.CategoriaInsumo">
+              <MappingFragment StoreEntitySet="CATEGORIASINSUMOS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="Model.Cliente">
+              <MappingFragment StoreEntitySet="CLIENTES">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="PersonaId" ColumnName="PERSONAID" />
+                <ScalarProperty Name="Correo" ColumnName="CORREO" />
+                <ScalarProperty Name="Telefono" ColumnName="TELEFONO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comidas">
+            <EntityTypeMapping TypeName="Model.Comida">
+              <MappingFragment StoreEntitySet="COMIDAS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="NOMBRE" />
+                <ScalarProperty Name="Precio" ColumnName="PRECIO" />
+                <ScalarProperty Name="CategoriaId" ColumnName="CATEGORIAID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetallesFactura">
+            <EntityTypeMapping TypeName="Model.DetalleFactura">
+              <MappingFragment StoreEntitySet="DETALLEFACTURAS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="FacturaId" ColumnName="FACTURAID" />
+                <ScalarProperty Name="ComidaId" ColumnName="COMIDAID" />
+                <ScalarProperty Name="SedeId" ColumnName="SEDEID" />
+                <ScalarProperty Name="Cantidad" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="Precio" ColumnName="PRECIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="Model.Empleado">
+              <MappingFragment StoreEntitySet="EMPLEADOS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="PersonaId" ColumnName="PERSONAID" />
+                <ScalarProperty Name="FechaContratacion" ColumnName="FECHACONTRATACION" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FECHACREACION" />
+                <ScalarProperty Name="Salario" ColumnName="SALARIO" />
+                <ScalarProperty Name="RolId" ColumnName="ROLID" />
+                <ScalarProperty Name="Correo" ColumnName="CORREO" />
+                <ScalarProperty Name="Clave" ColumnName="CLAVE" />
+                <ScalarProperty Name="Telefono" ColumnName="TELEFONO" />
+                <ScalarProperty Name="SedeId" ColumnName="SEDEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="Model.Factura">
+              <MappingFragment StoreEntitySet="FACTURAS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="ClienteId" ColumnName="CLIENTEID" />
+                <ScalarProperty Name="Total" ColumnName="TOTAL" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FECHACREACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Generos">
+            <EntityTypeMapping TypeName="Model.Genero">
+              <MappingFragment StoreEntitySet="GENEROS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Insumos">
+            <EntityTypeMapping TypeName="Model.Insumo">
+              <MappingFragment StoreEntitySet="INSUMOS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CategoriaId" ColumnName="CATEGORIAID" />
+                <ScalarProperty Name="Unidad" ColumnName="UNIDAD" />
+                <ScalarProperty Name="Marca" ColumnName="MARCA" />
+                <ScalarProperty Name="Proveedor" ColumnName="PROVEEDOR" />
+                <ScalarProperty Name="Precio" ColumnName="PRECIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventarios">
+            <EntityTypeMapping TypeName="Model.Inventario">
+              <MappingFragment StoreEntitySet="INVENTARIOS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="InsumoId" ColumnName="INSUMOID" />
+                <ScalarProperty Name="SedeId" ColumnName="SEDEID" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FECHACREACION" />
+                <ScalarProperty Name="MovimientoCantidad" ColumnName="MOVIMIENTOCANTIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permisos">
+            <EntityTypeMapping TypeName="Model.Permiso">
+              <MappingFragment StoreEntitySet="PERMISOS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="NOMBRE" />
+                <ScalarProperty Name="Codigo" ColumnName="CODIGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personas">
+            <EntityTypeMapping TypeName="Model.Persona">
+              <MappingFragment StoreEntitySet="PERSONAS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Nombres" ColumnName="NOMBRES" />
+                <ScalarProperty Name="Apellidos" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="GeneroId" ColumnName="GENEROID" />
+                <ScalarProperty Name="TipoDocumentoId" ColumnName="TIPODOCUMENTOID" />
+                <ScalarProperty Name="NumeroDocumento" ColumnName="NUMERODOCUMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Model.Rol">
+              <MappingFragment StoreEntitySet="ROLES">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sedes">
+            <EntityTypeMapping TypeName="Model.Sede">
+              <MappingFragment StoreEntitySet="SEDES">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="NOMBRE" />
+                <ScalarProperty Name="Direccion" ColumnName="DIRECCION" />
+                <ScalarProperty Name="Telefono" ColumnName="TELEFONO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposDocumento">
+            <EntityTypeMapping TypeName="Model.TipoDocumento">
+              <MappingFragment StoreEntitySet="TIPOSDOCUMENTO">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="NombreLargo" ColumnName="NOMBRELARGO" />
+                <ScalarProperty Name="NombreCorto" ColumnName="NOMBRECORTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComidaInsumos">
+            <EntityTypeMapping TypeName="Model.ComidaInsumo">
+              <MappingFragment StoreEntitySet="COMIDAINSUMOS">
+                <ScalarProperty Name="ComidaId" ColumnName="COMIDAID" />
+                <ScalarProperty Name="InsumoId" ColumnName="INSUMOID" />
+                <ScalarProperty Name="Cantidad" ColumnName="CANTIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PERMISOSROLES" TypeName="Model.PERMISOSROLES" StoreEntitySet="PERMISOSROLES">
+            <EndProperty Name="PERMISOS">
+              <ScalarProperty Name="Id" ColumnName="PERMISOID" />
+            </EndProperty>
+            <EndProperty Name="ROLES">
+              <ScalarProperty Name="Id" ColumnName="ROLID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RELACIONDEROLES" TypeName="Model.RELACIONDEROLES" StoreEntitySet="RELACIONDEROLES">
+            <EndProperty Name="ROLES">
+              <ScalarProperty Name="Id" ColumnName="ROLHIJOID" />
+            </EndProperty>
+            <EndProperty Name="ROLES1">
+              <ScalarProperty Name="Id" ColumnName="ROLPADREID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

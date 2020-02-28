@@ -1,0 +1,33 @@
+﻿@using Negocio.Modelo;
+@{
+    ViewBag.Titulo = "Ordenes";
+}
+
+    <div>
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-8">
+                @if (TempData["Mensaje"] != null) {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["Mensaje"]
+                    </div>
+                }
+                <form class="row justify-content-center" action="@Url.Action("Compras", "Inicio")" method="post">
+                    <div class="form-group col-sm-12 col-md-4">
+                        <label for="genero">Categorías</label>
+                        @{ var categoriasComidas = (List<CategoriaComida>)ViewBag.CategoriasComidas; }
+                        <select class="custom-select" name="liga">
+                            <option value="">Seleccione una categoría</option>
+                            @foreach (var categoriaComida in categoriasComidas) {
+                                if (categoriaComida.Id == ViewBag.CategoriaComidaId) {
+                                    <option value="@categoriaComida.Id" selected>@categoriaComida.Nombre</option>
+                                } else {
+                                    <option value="@categoriaComida.Id">@categoriaComida.Nombre</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </div>
