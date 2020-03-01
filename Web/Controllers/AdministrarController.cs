@@ -89,13 +89,7 @@ namespace Web.Controllers {
         public ActionResult EditarEmpleado() {
 
             return View();
-            /*
-            var empleadoDao = new EmpleadoDao(db);
-            var empleado = empleadoDao.EditarEmpleado();
-
-            ViewBag.Empleados = empleados;
-            */
-            return View();
+           
         }
     }
 }

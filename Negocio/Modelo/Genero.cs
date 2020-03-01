@@ -14,5 +14,12 @@ namespace Negocio.Modelo {
             
         public decimal Id { get; set; }
         public string Nombre { get; set; }
+
+        public DataAccess.Tablas.Genero Convertir() {
+            return new DataAccess.Tablas.Genero {
+                Id = Id,
+                Nombre = Nombre
+            };
+        }
     }
 }

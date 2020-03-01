@@ -14,5 +14,13 @@ namespace Negocio.Modelo {
         public decimal Id { get; set; }
         public string NombreLargo { get; set; }
         public string NombreCorto { get; set; }
+
+        public DataAccess.Tablas.TipoDocumento Convertir() {
+            return new DataAccess.Tablas.TipoDocumento {
+                Id = Id,
+                NombreLargo = NombreLargo,
+                NombreCorto = NombreCorto
+            };
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Negocio.Modelo {
     public class Persona {
-        public Persona() { } 
+        public Persona() { }
 
         public Persona(DataAccess.Tablas.Persona persona) {
             Id = persona.Id;
@@ -26,5 +26,16 @@ namespace Negocio.Modelo {
         public string NumeroDocumento { get; set; }
         public Genero Genero { get; set; }
         public TipoDocumento TipoDocumento { get; set; }
+
+        public DataAccess.Tablas.Persona Convertir() {
+            return new DataAccess.Tablas.Persona {
+                Id = Id,
+                Nombres = Nombres,
+                Apellidos = Apellidos,
+                GeneroId = GeneroId,
+                TipoDocumentoId = TipoDocumentoId,
+                NumeroDocumento = NumeroDocumento,
+            };
+        }
     }
 }

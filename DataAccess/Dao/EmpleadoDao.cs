@@ -13,7 +13,7 @@ namespace DataAccess.Dao {
         public EmpleadoDao(Entidades db) {
             this.db = db;
         }
-
+        
        
         public Empleado Login(string correo, string clave) {
             var consulta = from e in db.Empleados

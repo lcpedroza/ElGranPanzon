@@ -1,4 +1,4 @@
-﻿@using Negocio.Modelo;
+﻿@using DataAccess.Tablas;
 @{
     ViewBag.Titulo = "Ver Empleados";
 }
@@ -157,9 +157,9 @@
 
 <script>
     @{
-        var empleados2 = new List<Negocio.Modelo2.Empleado>();
+        var empleados2 = new List<Negocio.Modelo.Empleado>();
         foreach(var empleado in empleados) {
-            var empleado2 = new Negocio.Modelo2.Empleado(empleado);
+            var empleado2 = new Negocio.Modelo.Empleado(empleado);
             empleados2.Add(empleado2);
         }
         var jsonEmpleados = Newtonsoft.Json.JsonConvert.SerializeObject(empleados2);
