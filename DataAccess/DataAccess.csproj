@@ -59,6 +59,7 @@
     <Compile Include="Dao\ClienteDao.cs" />
     <Compile Include="Dao\EmpleadoDao.cs" />
     <Compile Include="Dao\GeneroDao.cs" />
+    <Compile Include="Dao\InsumoDao.cs" />
     <Compile Include="Dao\RolDao.cs" />
     <Compile Include="Dao\SedeDao.cs" />
     <Compile Include="Dao\TipoDocumentoDao.cs" />

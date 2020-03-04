@@ -1,0 +1,87 @@
+﻿@using DataAccess.Tablas;
+
+@{
+  ViewBag.Title = "Pedidos";
+}
+
+<h2>Pedidos</h2>
+
+<div class="row justify-content-center">
+  <div class="col-sm-12 col-md-10">
+    <h2>Pedidos</h2>
+    <table class="table table-sm table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">SubTotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        @{var pedidos = (List<Insumo>)ViewBag.Insumos; }
+        @foreach (var insumo in insumos)
+        {
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+            <td>
+              <button type="button" class="btn btn-primary boton-editar-empleado" id="boton-editar-empleado-@insumo.Id" data-toggle="modal" data-target="#modaAgregarProducto">
+                Editar
+              </button>
+              @Html.ActionLink(
+                   "Agregar",
+                   new
+                        {
+
+                   },
+                   atributosAgregar
+               )
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="form-group col-sm-12 col-md-6">
+  <label for="genero">Género</label>
+  @{ var categoriasComida = (List<CategoriaComida>)ViewBag.CategoriasComida; }
+  <select class="custom-select" required name="generos">
+    @foreach (var categoriaComida in categoriasComida)
+    {
+      <option value="@categoriaComida.Id">@categoriaComida.Nombre</option>
+    }
+  </select>
+</div>
+<button type="submit" class="btn btn-primary">Buscar</button>
+
+@{var comidas = (List<Insumo>)ViewBag.Insumos; }
+@foreach (var insumo in comidas)
+{
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Cras justo odio</li>
+      <li class="list-group-item">Dapibus ac facilisis in</li>
+      <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+    <div class="card-body">
+      <button type="submit" class="btn btn-primary">Agregar comida</button>
+
+    </div>
+  </div>
+}

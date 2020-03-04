@@ -3,6 +3,7 @@ using DataAccess.Dao;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using DataAccess.Tablas;
 
 namespace Web.Controllers {
     public class AdministrarController : Controller {
@@ -26,7 +27,7 @@ namespace Web.Controllers {
 
             return View();
         }
-
+        
         public ActionResult RegistrarEmpleado() {
             var empleadoLogueado = (Empleado)Session["empleado"];
 
@@ -47,9 +48,6 @@ namespace Web.Controllers {
                 Clave = Request.Form.Get("clave")
         };
 
-           
-
-            
 
             var empleadoDao = new EmpleadoDao(db);
             empleadoDao.CrearEmpleado(empleado.Convertir());
@@ -90,6 +88,37 @@ namespace Web.Controllers {
 
             return View();
            
+        }
+
+        public ActionResult CrearProducto()
+        {
+            var categoriaInsumoDao = new CategoriaInsumoDao(db);
+            var categoriasInsumo = categoriaInsumoDao.GetCategoriasInumo();
+            ViewBag.Categorias = categoriasInsumo;
+            return View();
+
+        }
+
+        public ActionResult AgregarProducto() {
+            var empleadoLogueado = (Empleado)Session["empleado"];
+
+            var insumo = new Insumo();
+
+
+
+            insumo.Nombre = Request.Form.Get("Nombre");
+            insumo.Marca = Request.Form.Get("Marca");
+            insumo.CategoriaId = Convert.ToInt32(Request.Form.Get("categorias"));
+            insumo.Proveedor = Request.Form.Get("Provedor");
+            insumo.Precio = Convert.ToInt32(Request.Form.Get("Precio"));
+            insumo.FechaCompra = Convert.ToDateTime(Request.Form.Get("fechaCompra"));
+            insumo.FechaVencimiento = Convert.ToDateTime(Request.Form.Get("fechaVencimiento"));
+
+            
+            var insumoDao = new InsumoDao(db);
+            insumoDao.CrearInsumo(insumo);
+            Response.Redirect("/Home/Index");
+            return View();
         }
     }
 }
