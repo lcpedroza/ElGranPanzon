@@ -160,6 +160,8 @@
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.magnific-popup.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Views\Administrar\AgregarProducto.cshtml" />
+    <Content Include="Views\Compras\Pedidos.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <None Include="Views\Ordenes\Ordenes.cshtml" />
     <Content Include="Web.config" />
