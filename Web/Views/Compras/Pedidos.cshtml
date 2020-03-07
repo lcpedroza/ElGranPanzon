@@ -1,87 +1,112 @@
 ﻿@using DataAccess.Tablas;
 
 @{
-  ViewBag.Title = "Pedidos";
+    ViewBag.Title = "Pedidos";
 }
 
 <h2>Pedidos</h2>
 
-<div class="row justify-content-center">
-  <div class="col-sm-12 col-md-10">
-    <h2>Pedidos</h2>
-    <table class="table table-sm table-dark">
-      <thead>
-        <tr>
-          <th scope="col">Código</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Precio</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">SubTotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        @{var pedidos = (List<Insumo>)ViewBag.Insumos; }
-        @foreach (var insumo in insumos)
-        {
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-            <td>
-              <button type="button" class="btn btn-primary boton-editar-empleado" id="boton-editar-empleado-@insumo.Id" data-toggle="modal" data-target="#modaAgregarProducto">
-                Editar
-              </button>
-              @Html.ActionLink(
-                   "Agregar",
-                   new
-                        {
-
-                   },
-                   atributosAgregar
-               )
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-</div>
-
 <div class="form-group col-sm-12 col-md-6">
-  <label for="genero">Género</label>
-  @{ var categoriasComida = (List<CategoriaComida>)ViewBag.CategoriasComida; }
-  <select class="custom-select" required name="generos">
-    @foreach (var categoriaComida in categoriasComida)
-    {
-      <option value="@categoriaComida.Id">@categoriaComida.Nombre</option>
-    }
-  </select>
+    <label for="genero">Categorías</label>
+    @{ var categoriasComida = (List<CategoriaComida>)ViewBag.CategoriasComidas; }
+    <select class="custom-select" required name="categorias">
+        @foreach (var categoriaComida in categoriasComida) {
+            <option value="@categoriaComida.Id">@categoriaComida.Nombre</option>
+        }
+    </select>
 </div>
 <button type="submit" class="btn btn-primary">Buscar</button>
 
-@{var comidas = (List<Insumo>)ViewBag.Insumos; }
-@foreach (var insumo in comidas)
-{
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Cras justo odio</li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Vestibulum at eros</li>
-    </ul>
-    <div class="card-body">
-      <button type="submit" class="btn btn-primary">Agregar comida</button>
 
+<div class="row justify-content-center">
+    <div class="col-sm-12 col-md-10">
+        @{var comidas = (List<Comida>)ViewBag.Comidas; }
+        <div class="row">
+            @foreach (var comida in comidas) {
+                <form action="@Url.Action("SeleccionarPlato", "Compras")" method="post">
+                    <div class="card">
+                        <img src="@Url.Content("~/Content/Images/" + comida.Nombre + ".jpg")" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Platos</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Nombre: @comida.Nombre</li>
+                            <li class="list-group-item">Precio: @comida.Precio</li>
+                        </ul>
+                        <div class="row justify-content-center">
+                            <input type="hidden" value="@ViewBag.ComidaId" name="comidaId">
+                            <input type="hidden" value="@comida.Precio" name="precio">
+                            <div class="col-sm-12 col-md-6">
+                                <label>Cantidad a comprar</label>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <input type="number" required min="0" name="cantidad" class="form-control">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Seleccionar</button>
+                    </div>
+                </form>
+            }
+        </div>
     </div>
-  </div>
-}
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="carrito">
+
+    < div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="justify-content-center">
+                <h5 class="modal-title">Carrito de compras</h5>
+            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-10">
+                    <table class="table table-sm table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">SubTotal</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{var factura = (Factura)Session["factura"]; }
+                            @{var detallesFactura = factura.DETALLEFACTURAS; }
+                            @foreach (var df in detallesFactura) {
+                                <tr>
+                                    <td>@df.COMIDAS.Id</td>
+                                    <td>@df.COMIDAS.Nombre</td>
+                                    <td>@df.Cantidad</td>
+                                    <td>@df.Precio</td>
+                                    <td>@df.Subtotal</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Total: @factura.TotalCompra()</li>
+                        <li class="list-group-item">Cliente: @factura.CLIENTES.PERSONAS.Nombres @factura.CLIENTES.PERSONAS.Apellidos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            @{
+                var atributosNavLink = new Dictionary<string, object> {
+                                    {"class", "btn btn-primary" }
+                        };
+            }
+            @Html.ActionLink("Comprar", "RealizarCompra", "Inicio", null, atributosNavLink)
+        </div>
+    </div>
+</div>
+        }

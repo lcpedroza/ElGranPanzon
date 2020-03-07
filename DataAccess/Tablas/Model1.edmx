@@ -59,6 +59,7 @@ advertencia 6002: La tabla o vista 'LUIS.COMIDAINSUMOS' no tiene definida ningun
           <Property Name="SEDEID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="CANTIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="PRECIO" Type="float" Precision="126" Scale="0" Nullable="false" />
+          <Property Name="SUBTOTAL" Type="float" Precision="126" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="EMPLEADOS">
           <Key>
@@ -304,6 +305,18 @@ advertencia 6002: La tabla o vista 'LUIS.COMIDAINSUMOS' no tiene definida ningun
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FACCLI">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+          <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FACTURAS">
+              <PropertyRef Name="CLIENTEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FACSED">
           <End Role="SEDES" Type="Self.SEDES" Multiplicity="1" />
           <End Role="DETALLEFACTURAS" Type="Self.DETALLEFACTURAS" Multiplicity="*" />
@@ -469,6 +482,10 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
             <End Role="TIPOSDOCUMENTO" EntitySet="TIPOSDOCUMENTO" />
             <End Role="PERSONAS" EntitySet="PERSONAS" />
           </AssociationSet>
+          <AssociationSet Name="FACCLI" Association="Self.FACCLI">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="FACTURAS" EntitySet="FACTURAS" />
+          </AssociationSet>
           <AssociationSet Name="FACSED" Association="Self.FACSED">
             <End Role="SEDES" EntitySet="SEDES" />
             <End Role="DETALLEFACTURAS" EntitySet="DETALLEFACTURAS" />
@@ -531,6 +548,7 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
           <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Telefono" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="PERSONAS" Relationship="Self.CLIPER" FromRole="CLIENTES" ToRole="PERSONAS" />
+          <NavigationProperty Name="FACTURAS" Relationship="Model.FACCLI" FromRole="Cliente" ToRole="Factura" />
         </EntityType>
         <EntityType Name="Comida">
           <Key>
@@ -557,6 +575,7 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
           <NavigationProperty Name="COMIDAS" Relationship="Self.DETCOM" FromRole="DETALLEFACTURAS" ToRole="COMIDAS" />
           <NavigationProperty Name="FACTURAS" Relationship="Self.DETFAC" FromRole="DETALLEFACTURAS" ToRole="FACTURAS" />
           <NavigationProperty Name="SEDES" Relationship="Self.FACSED" FromRole="DETALLEFACTURAS" ToRole="SEDES" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -585,6 +604,7 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
           <Property Name="Total" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="DETALLEFACTURAS" Relationship="Self.DETFAC" FromRole="FACTURAS" ToRole="DETALLEFACTURAS" />
+          <NavigationProperty Name="CLIENTES" Relationship="Model.FACCLI" FromRole="Factura" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
@@ -962,7 +982,23 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
             <End Role="ROLES" EntitySet="Roles" />
             <End Role="ROLES1" EntitySet="Roles" />
           </AssociationSet>
+          <AssociationSet Name="FACCLI" Association="Model.FACCLI">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Factura" EntitySet="Facturas" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FACCLI">
+          <End Type="Model.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="Model.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1008,6 +1044,7 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
           <EntitySetMapping Name="DetallesFactura">
             <EntityTypeMapping TypeName="Model.DetalleFactura">
               <MappingFragment StoreEntitySet="DETALLEFACTURAS">
+                <ScalarProperty Name="Subtotal" ColumnName="SUBTOTAL" />
                 <ScalarProperty Name="Id" ColumnName="ID" />
                 <ScalarProperty Name="FacturaId" ColumnName="FACTURAID" />
                 <ScalarProperty Name="ComidaId" ColumnName="COMIDAID" />

@@ -14,11 +14,19 @@ namespace DataAccess.Tablas
     
     public partial class Cliente
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cliente()
+        {
+            this.FACTURAS = new HashSet<Factura>();
+        }
+    
         public decimal Id { get; set; }
         public decimal PersonaId { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
     
         public virtual Persona PERSONAS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Factura> FACTURAS { get; set; }
     }
 }

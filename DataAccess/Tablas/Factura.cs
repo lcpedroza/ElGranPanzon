@@ -27,5 +27,6 @@ namespace DataAccess.Tablas
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleFactura> DETALLEFACTURAS { get; set; }
+        public virtual Cliente CLIENTES { get; set; }
     }
 }

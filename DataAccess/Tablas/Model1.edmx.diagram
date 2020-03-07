@@ -38,6 +38,7 @@
         <AssociationConnector Association="Model.EMPTIP" ManuallyRouted="false" />
         <AssociationConnector Association="Model.PERMISOSROLES" ManuallyRouted="false" />
         <AssociationConnector Association="Model.RELACIONDEROLES" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FACCLI" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
