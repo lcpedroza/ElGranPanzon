@@ -18,7 +18,6 @@ namespace DataAccess.Dao
 
         public Insumo CrearInsumo(Insumo i)
         {
-            i.FechaCreacion = DateTime.Now;
             db.Insumos.Add(i);
             db.SaveChanges();
             return i;

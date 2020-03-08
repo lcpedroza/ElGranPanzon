@@ -1,4 +1,4 @@
-﻿using Negocio.Modelo;
+﻿
 using DataAccess.Dao;
 using System;
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ namespace Web.Controllers {
             var empleadoLogueado = (Empleado)Session["empleado"];
 
             var empleado = new Empleado {
-                Persona = new Persona {
+                PERSONAS = new Persona {
                     Nombres = Request.Form.Get("Nombres"),
                     Apellidos = Request.Form.Get("Apellidos"),
                     GeneroId = Convert.ToInt32(Request.Form.Get("generos")),
@@ -50,7 +50,7 @@ namespace Web.Controllers {
 
 
             var empleadoDao = new EmpleadoDao(db);
-            empleadoDao.CrearEmpleado(empleado.Convertir());
+            empleadoDao.CrearEmpleado(empleado);
             Response.Redirect("/Home/Index");
             return View();
         }
@@ -111,9 +111,6 @@ namespace Web.Controllers {
             insumo.CategoriaId = Convert.ToInt32(Request.Form.Get("categorias"));
             insumo.Proveedor = Request.Form.Get("Provedor");
             insumo.Precio = Convert.ToInt32(Request.Form.Get("Precio"));
-            insumo.FechaCompra = Convert.ToDateTime(Request.Form.Get("fechaCompra"));
-            insumo.FechaVencimiento = Convert.ToDateTime(Request.Form.Get("fechaVencimiento"));
-
             
             var insumoDao = new InsumoDao(db);
             insumoDao.CrearInsumo(insumo);

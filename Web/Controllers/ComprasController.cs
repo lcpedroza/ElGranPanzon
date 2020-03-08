@@ -36,7 +36,8 @@ namespace Web.Controllers {
 
             ViewBag.CategoriasComidas = categoriasComidas;
             ViewBag.CategoriaComidaId = categoriaComidaId;
-            ViewBag.Comida = comidas;
+
+            ViewBag.Comidas = comidas;
             return View();
         }
 
