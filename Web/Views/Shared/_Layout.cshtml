@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using DataAccess.Tablas;
+@{
+
+    var empleadoLogueado = (DataAccess.Tablas.Empleado)Session["empleado"];
+
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,22 +26,24 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
 
-                    @if (Session["empleado"] != null) {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Administrar
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @{
-                                    var atributosDropdown = new Dictionary<string, object> {
+                    @if (empleadoLogueado != null) {
+                        if (empleadoLogueado.VerificarCualquierPermiso("CREAR_EMPLEADO", "VER_EMPLEADO")) {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Administrar
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @{
+                                        var atributosDropdown = new Dictionary<string, object> {
                                     {"class", "dropdown-item" }
                                 };
-                                }
+                                    }
 
-                                @Html.ActionLink("Crear Empleado", "CrearEmpleado", "Administrar", null, atributosDropdown)
-                                @Html.ActionLink("Ver Empleados", "VerEmpleados", "Administrar", null, atributosDropdown)
-                            </div>
-                        </li>
+                                    @Html.ActionLink("Crear Empleado", "CrearEmpleado", "Administrar", null, atributosDropdown)
+                                    @Html.ActionLink("Ver Empleados", "VerEmpleados", "Administrar", null, atributosDropdown)
+                                </div>
+                            </li>
+                        }
                     }
 
                     @{
@@ -54,21 +62,27 @@
                             <a class="dropdown-item" href="#">Dirección: Cra 50 #128 - 38</a>
                         </div>
                     </li>
-                    @if (Session["empleado"] == null) {
+                    @if (empleadoLogueado == null) {
                         <li class="nav-item">
                             @Html.ActionLink("Crear Cliente", "CrearCliente", "Home", null, atributosNavLink)
                         </li>
                     }
-                    @if (Session["empleado"] == null) {
+                    @if (empleadoLogueado == null) {
                         <li class="nav-item">
                             @Html.ActionLink("Iniciar Sesión", "IniciarSesion", "Login", null, atributosNavLink)
                         </li>
                     }
-                    @if (Session["empleado"] != null) {
+                    @if (empleadoLogueado != null) {
                         <li class="nav-item">
                             @Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", null, atributosNavLink)
                         </li>
                     }
+                    @if (empleadoLogueado != null && empleadoLogueado.VerificarPermiso(Permiso.RealizarCompra)) {
+                        <li class="nav-item">
+                            @Html.ActionLink("Realizar Pedido", "Pedidos", "Compras", null, atributosNavLink)
+                        </li>
+                    }
+
                 </ul>
             </div>
         </div>

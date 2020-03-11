@@ -87,6 +87,7 @@
     <Compile Include="Tablas\Empleado.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tablas\EmpleadoComplemento.cs" />
     <Compile Include="Tablas\Factura.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -119,6 +120,7 @@
     <Compile Include="Tablas\Permiso.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tablas\PermisoComplemento.cs" />
     <Compile Include="Tablas\Persona.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
