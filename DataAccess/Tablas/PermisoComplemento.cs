@@ -15,5 +15,6 @@ namespace DataAccess.Tablas {
         public static readonly string verInventarioComida = "VER_INVENTARIO_C";
         public static readonly string EntregarInsumo = "ENTREGAR_INSUMO";
         public static readonly string RealizarCompra = "REALIZAR_VENTA";
+        public static readonly string CrearCliente = "CREAR_CLIENTE";
     }
 }

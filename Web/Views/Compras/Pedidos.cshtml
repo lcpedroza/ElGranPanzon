@@ -5,6 +5,11 @@
 }
 
 <h2>Pedidos</h2>
+@if (TempData["Mensaje"] != null) {
+    <div class="alert alert-success" role="alert">
+        @TempData["Mensaje"]
+    </div>
+}
 <form action="@Url.Action("Pedidos", "Compras")" method="post">
     <div class="row justify-content-center">
         <div class="form-group col-sm-12 col-md-4">
@@ -38,7 +43,7 @@
                             <li class="list-group-item">Precio: @comida.Precio</li>
                         </ul>
                         <div class="row justify-content-center">
-                            <input type="hidden" value="@ViewBag.ComidaId" name="comidaId">
+                            <input type="hidden" value="@comida.Id " name="comidaId">
                             <input type="hidden" value="@comida.Precio" name="precio">
                             <div class="col-sm-12 col-md-6">
                                 <label>Cantidad a comprar</label>
@@ -54,6 +59,9 @@
         }
     </div>
 </div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#carrito">
+    Ir al carrito de compras
+</button>
 
 
 <div class="modal" tabindex="-1" role="dialog" id="carrito">
@@ -76,47 +84,52 @@
                             <tr>
                                 <th scope="col">Código</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Precio</th>
                                 <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
                                 <th scope="col">SubTotal</th>
                             </tr>
                         </thead>
-                        @*
-                            <tbody>
-                                @{var factura = (Factura)Session["factura"]; }
-                                @{var detallesFactura = factura.DETALLEFACTURAS; }
-                                @foreach (var df in detallesFactura) {
-                                    <tr>
-                                        <td>@df.COMIDAS.Id</td>
-                                        <td>@df.COMIDAS.Nombre</td>
-                                        <td>@df.Cantidad</td>
-                                        <td>@df.Precio</td>
-                                        <td>@df.Subtotal</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        *@
+
+                        <tbody>
+                            @{var factura = (Factura)Session["factura"]; }
+                            @{var detallesFactura = factura.DETALLEFACTURAS; }
+                            @foreach (var df in detallesFactura) {
+                                <tr>
+                                    <td>@df.COMIDAS.Id</td>
+                                    <td>@df.COMIDAS.Nombre</td>
+                                    <td>@df.Cantidad</td>
+                                    <td>@df.Precio</td>
+                                    <td>@df.CalcularSubtotal()</td>
+                                </tr>
+                            }
+                        </tbody>
+
                     </table>
-                    @*
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Total: @factura.TotalCompra()</li>
-                            <li class="list-group-item">Cliente: @factura.CLIENTES.PERSONAS.Nombres @factura.CLIENTES.PERSONAS.Apellidos</li>
-                        </ul>
-                    *@
+                    @{
+                        var atributosNavLink = new Dictionary<string, object> {
+                                        {"class", "btn btn-primary" }
+                            };
+                    }
+                    @Html.ActionLink("Seleccionar Cliente", "VerClientes", "Home", null, atributosNavLink)
+                    @Html.ActionLink("Crear Cliente", "CrearCliente", "Home", null, atributosNavLink)
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Total: @factura.TotalCompra()</li>
+
+                        @if (factura.CLIENTES == null) {
+                            <li class="list-group-item">Cliente: "No hay cliente seleccionado"</li>
+                        } else {
+                            <li class="list-group-item">
+                                Cliente: @factura.CLIENTES.PERSONAS.Nombres  @factura.CLIENTES.PERSONAS.Apellidos
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </div>
-        @*
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                @{
-                    var atributosNavLink = new Dictionary<string, object> {
-                                        {"class", "btn btn-primary" }
-                            };
-                }
-                @Html.ActionLink("Comprar", "RealizarCompra", "Inicio", null, atributosNavLink)
-            </div>
-        *@
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            @Html.ActionLink("Comprar", "RealizarCompra", "Compras", null, atributosNavLink)
+        </div>
     </div>
 </div>
 

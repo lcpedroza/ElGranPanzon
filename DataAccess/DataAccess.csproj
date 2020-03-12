@@ -59,6 +59,7 @@
     <Compile Include="Dao\ClienteDao.cs" />
     <Compile Include="Dao\ComidaDao.cs" />
     <Compile Include="Dao\EmpleadoDao.cs" />
+    <Compile Include="Dao\FacturaDao.cs" />
     <Compile Include="Dao\GeneroDao.cs" />
     <Compile Include="Dao\InsumoDao.cs" />
     <Compile Include="Dao\RolDao.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Tablas\DetalleFactura.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tablas\DetalleFacturaComplemento.cs" />
     <Compile Include="Tablas\Empleado.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

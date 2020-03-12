@@ -1,0 +1,60 @@
+﻿@using DataAccess.Tablas;
+@{
+    ViewBag.Titulo = "Ver Clientes";
+}
+
+<div class="row justify-content-center">
+    <div class="col-sm-12 col-md-10">
+        <h2>Lista de clientes</h2>
+        <table class="table table-sm table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">T.Documento</th>
+                    <th scope="col">N.Documento</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{var clientes = (List
+                  <Cliente>
+                      )ViewBag.Clientes; }
+                @foreach (var cliente in clientes) {
+                    Console.WriteLine(cliente.Id);
+                    <tr>
+                        <td>@cliente.PERSONAS.Nombres</td>
+                        <td>@cliente.PERSONAS.Apellidos</td>
+                        <td>@cliente.PERSONAS.TIPOSDOCUMENTO.NombreCorto</td>
+                        <td>@cliente.PERSONAS.NumeroDocumento</td>
+                        <td>@cliente.PERSONAS.GENEROS.Nombre</td>
+                        <td>@cliente.Telefono</td>
+                        <td>@cliente.Correo</td>
+                        @{
+                            var atributosSeleccionar = new Dictionary
+                            <string, object>
+                                {
+                            {"class", "btn btn-primary" }
+                            };
+                        }
+                        <td>
+                            @Html.ActionLink(
+                            "Seleccionar",
+                            "SeleccionarCliente",
+                            "Home",
+                            new {
+                            cliente = cliente.Id
+                            },
+                            atributosSeleccionar
+                            )
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

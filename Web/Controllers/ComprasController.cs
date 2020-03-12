@@ -59,15 +59,22 @@ namespace Web.Controllers {
             var factura = (Factura)Session["factura"];
             factura.DETALLEFACTURAS.Add(detalleFactura);
 
-            Response.Redirect("/Inicio/Compras?comida=" + comidaId);
+            Response.Redirect("/Compras/Pedidos?comida=" + comidaId);
             return View();
         }
 
         public ActionResult RealizarCompra() {
 
+            var factura = (Factura)Session["factura"];
+            var facturaDao = new FacturaDao(db);
+            facturaDao.crearFactura(factura);
+
+            Response.Redirect("/Compras/Pedidos");
+            TempData["Mensaje"] = "La compra se ha relizado exitosamente";
+            Session["factura"] = null;
             return View();
         }
 
-        
+
     }
 }

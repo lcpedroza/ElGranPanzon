@@ -64,11 +64,6 @@
                     </li>
                     @if (empleadoLogueado == null) {
                         <li class="nav-item">
-                            @Html.ActionLink("Crear Cliente", "CrearCliente", "Home", null, atributosNavLink)
-                        </li>
-                    }
-                    @if (empleadoLogueado == null) {
-                        <li class="nav-item">
                             @Html.ActionLink("Iniciar Sesión", "IniciarSesion", "Login", null, atributosNavLink)
                         </li>
                     }

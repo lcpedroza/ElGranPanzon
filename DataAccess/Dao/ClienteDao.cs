@@ -19,5 +19,15 @@ namespace DataAccess.Dao {
             return cliente;
         }
 
+        public List<Cliente> GetClientes() {
+            return db.Clientes.ToList();
+        }
+
+        public Cliente GetCliente(int? id) {
+            var consulta = from c in db.Clientes
+                           where c.Id == id
+                           select c;
+            return consulta.SingleOrDefault();
+        }
     }
 }
