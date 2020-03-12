@@ -51,10 +51,11 @@ namespace Web.Controllers {
                 Precio = Convert.ToDecimal(precio),
                 Cantidad = Convert.ToDecimal(cantidad)
             };
-
+            var empleadoLogeado = (DataAccess.Tablas.Empleado)Session["empleado"];
             var comidaDao = new ComidaDao(db);
             var comida = comidaDao.GetComida(detalleFactura.ComidaId);
             detalleFactura.COMIDAS = comida;
+            detalleFactura.SEDES = empleadoLogeado.SEDES;
 
             var factura = (Factura)Session["factura"];
             factura.DETALLEFACTURAS.Add(detalleFactura);
