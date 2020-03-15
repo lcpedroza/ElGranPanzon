@@ -27,7 +27,6 @@
         <AssociationConnector Association="Model.COMINSCOM" ManuallyRouted="false" />
         <AssociationConnector Association="Model.DETCOM" ManuallyRouted="false" />
         <AssociationConnector Association="Model.DETFAC" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FACSED" ManuallyRouted="false" />
         <AssociationConnector Association="Model.EMPPER" ManuallyRouted="false" />
         <AssociationConnector Association="Model.EMPROL" ManuallyRouted="false" />
         <AssociationConnector Association="Model.EMPSED" ManuallyRouted="false" />
@@ -41,6 +40,7 @@
         <AssociationConnector Association="Model.FACCLI" />
         <EntityTypeShape EntityType="Model.Unidad" Width="1.5" PointX="5.75" PointY="17.875" />
         <AssociationConnector Association="Model.INSUNI" />
+        <AssociationConnector Association="Model.FK_SEDES" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

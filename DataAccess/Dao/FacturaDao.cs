@@ -20,7 +20,6 @@ namespace DataAccess.Dao {
             foreach (var df in factura.DETALLEFACTURAS) {
                 var detalleFactura = new DetalleFactura {
                     ComidaId = df.COMIDAS.Id,
-                    SedeId = df.SEDES.Id,
                     Cantidad = df.Cantidad,
                     Precio = df.Precio,
                     Subtotal = df.Subtotal
@@ -32,12 +31,21 @@ namespace DataAccess.Dao {
                 FechaCreacion = DateTime.Now,
                 ClienteId = factura.CLIENTES.Id,
                 Total = factura.Total,
+                SedeId = factura.SEDES.Id,
                 DETALLEFACTURAS = detallesFacturas
             };
 
             db.Facturas.Add(f);
             db.SaveChanges();
             return f;
+        }
+
+        public List<Factura> GetFacturas(Sede s) {
+            var consulta = from f in db.Facturas
+                           orderby f.FechaCreacion descending
+                           where f.SEDES.Id == s.Id
+                           select f;
+            return consulta.ToList();
         }
     }
 }

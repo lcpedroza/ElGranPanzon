@@ -1,0 +1,55 @@
+﻿@using DataAccess.Tablas;
+
+@{
+    ViewBag.Title = "VerHistorialDeVentas";
+}
+
+<div class="offset-md-1 col-sm-12 col-md-10">
+    @{var facturas = (List<Factura>)ViewBag.Facturas; }
+
+    @foreach (var factura in facturas) {
+        <div class="row">
+            <div class="col-sm-6 col-md-12">
+                <form action="@Url.Action("VerHistorial", "Compras")" method="post">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Fecha de Compra: @factura.FechaCreacion</h5>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-12 col-md-10">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Código</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Cantidad</th>
+                                                <th scope="col">Precio</th>
+                                                <th scope="col">Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{var detallesFactura = (List<DetalleFactura>
+                                                            )ViewBag.DetallesFactura; }
+                                            @foreach (var detalleFactura in factura.DETALLEFACTURAS) {
+                                                <tr>
+                                                    <td>@factura.Id</td>
+                                                    <td>@detalleFactura.COMIDAS.Nombre</td>
+                                                    <td>@detalleFactura.Cantidad</td>
+                                                    <td>@detalleFactura.COMIDAS.Precio</td>
+                                                    <td>@detalleFactura.CalcularSubtotal()</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Total: @factura.TotalCompra()</li>
+                            <li class="list-group-item">Cliente: @factura.CLIENTES.PERSONAS.Nombres @factura.CLIENTES.PERSONAS.Apellidos</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+</div>

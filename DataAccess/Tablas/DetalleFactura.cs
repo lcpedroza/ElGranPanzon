@@ -17,13 +17,11 @@ namespace DataAccess.Tablas
         public decimal Id { get; set; }
         public decimal FacturaId { get; set; }
         public decimal ComidaId { get; set; }
-        public decimal SedeId { get; set; }
         public decimal Cantidad { get; set; }
         public decimal Precio { get; set; }
         public decimal Subtotal { get; set; }
     
         public virtual Comida COMIDAS { get; set; }
         public virtual Factura FACTURAS { get; set; }
-        public virtual Sede SEDES { get; set; }
     }
 }

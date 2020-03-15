@@ -182,6 +182,7 @@
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.magnific-popup.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <None Include="Views\Compras\Verhistorial.cshtml" />
     <Content Include="Views\Insumo\AgregarProducto.cshtml" />
     <Content Include="Views\Compras\Pedidos.cshtml" />
     <None Include="Views\Insumo\EntregarInsumo.cshtml" />

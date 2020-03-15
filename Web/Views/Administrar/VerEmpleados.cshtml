@@ -2,6 +2,11 @@
 @{
     ViewBag.Titulo = "Ver Empleados";
 }
+@{
+
+    var empleadoLogueado = (DataAccess.Tablas.Empleado)Session["empleado"];
+
+}
 
 <div class="row justify-content-center">
     <div class="col-sm-12 col-md-10">
@@ -48,18 +53,20 @@
                             <button type="button" class="btn btn-primary boton-editar-empleado" id="boton-editar-empleado-@empleado.Id" data-toggle="modal" data-target="#modaEditarEmpleado">
                                 Editar
                             </button>
-                            @Html.ActionLink(
-                                 "Eliminar",
-                                 "EliminarEmpleado",
-                                 "Administrar",
-                                 new {
-                                     empleado = empleado.Id
-                                 },
-                                 atributosEliminar
-                             )
+                            @if (empleadoLogueado != null && empleadoLogueado.VerificarPermiso(Permiso.EliminarEmpleado)) {
+                                @Html.ActionLink(
+                                          "Eliminar",
+                                          "EliminarEmpleado",
+                                          "Administrar",
+                                          new {
+                                              empleado = empleado.Id
+                                          },
+                                          atributosEliminar
+                                      )
+                            }
                         </td>
                     </tr>
-                  }
+                }
             </tbody>
         </table>
     </div>

@@ -24,9 +24,11 @@ namespace DataAccess.Tablas
         public decimal ClienteId { get; set; }
         public decimal Total { get; set; }
         public System.DateTime FechaCreacion { get; set; }
+        public decimal SedeId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleFactura> DETALLEFACTURAS { get; set; }
         public virtual Cliente CLIENTES { get; set; }
+        public virtual Sede SEDES { get; set; }
     }
 }

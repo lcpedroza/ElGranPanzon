@@ -17,9 +17,9 @@ namespace DataAccess.Tablas
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sede()
         {
-            this.DETALLEFACTURAS = new HashSet<DetalleFactura>();
             this.EMPLEADOS = new HashSet<Empleado>();
             this.INVENTARIOS = new HashSet<Inventario>();
+            this.FACTURAS = new HashSet<Factura>();
         }
     
         public decimal Id { get; set; }
@@ -28,10 +28,10 @@ namespace DataAccess.Tablas
         public string Telefono { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleFactura> DETALLEFACTURAS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empleado> EMPLEADOS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventario> INVENTARIOS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Factura> FACTURAS { get; set; }
     }
 }

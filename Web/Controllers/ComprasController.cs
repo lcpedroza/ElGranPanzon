@@ -18,10 +18,11 @@ namespace Web.Controllers {
         }
 
         public ActionResult Pedidos() {
+            var empleadoLogeado = (DataAccess.Tablas.Empleado)Session["empleado"];
             if (Session["factura"] == null) {
                 Session["factura"] = new Factura {
                     DETALLEFACTURAS = new List<DetalleFactura>(),
-                    CLIENTES = (Cliente)Session["cliente"]
+                    SEDES = empleadoLogeado.SEDES
                 };
             }
             var categoriaComidaIdStr = Request.Form.Get("categorias");
@@ -51,11 +52,11 @@ namespace Web.Controllers {
                 Precio = Convert.ToDecimal(precio),
                 Cantidad = Convert.ToDecimal(cantidad)
             };
-            var empleadoLogeado = (DataAccess.Tablas.Empleado)Session["empleado"];
+
             var comidaDao = new ComidaDao(db);
             var comida = comidaDao.GetComida(detalleFactura.ComidaId);
             detalleFactura.COMIDAS = comida;
-            detalleFactura.SEDES = empleadoLogeado.SEDES;
+
 
             var factura = (Factura)Session["factura"];
             factura.DETALLEFACTURAS.Add(detalleFactura);
@@ -65,7 +66,7 @@ namespace Web.Controllers {
         }
 
         public ActionResult RealizarCompra() {
-
+    
             var factura = (Factura)Session["factura"];
             var facturaDao = new FacturaDao(db);
             facturaDao.crearFactura(factura);
@@ -76,6 +77,14 @@ namespace Web.Controllers {
             return View();
         }
 
+        public ActionResult VerHistorial() {
+            var empleadoLogeado = (DataAccess.Tablas.Empleado)Session["empleado"];
 
+            var facturaDao = new FacturaDao(db);
+            var facturas = facturaDao.GetFacturas(empleadoLogeado.SEDES);
+
+            ViewBag.Facturas = facturas;
+            return View();
+        }
     }
 }
