@@ -62,6 +62,7 @@
     <Compile Include="Dao\FacturaDao.cs" />
     <Compile Include="Dao\GeneroDao.cs" />
     <Compile Include="Dao\InsumoDao.cs" />
+    <Compile Include="Dao\InventarioDao.cs" />
     <Compile Include="Dao\RolDao.cs" />
     <Compile Include="Dao\SedeDao.cs" />
     <Compile Include="Dao\TipoDocumentoDao.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Tablas\Insumo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tablas\InsumoComplemento.cs" />
     <Compile Include="Tablas\Inventario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -144,6 +146,9 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Tablas\Unidad.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

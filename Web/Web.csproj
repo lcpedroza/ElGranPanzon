@@ -135,6 +135,7 @@
     <Compile Include="Controllers\AdministrarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
+    <Compile Include="Controllers\InsumoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -181,8 +182,10 @@
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.magnific-popup.min.js" />
     <Content Include="Scripts\jquery.min.js" />
-    <Content Include="Views\Administrar\AgregarProducto.cshtml" />
+    <Content Include="Views\Insumo\AgregarProducto.cshtml" />
     <Content Include="Views\Compras\Pedidos.cshtml" />
+    <None Include="Views\Insumo\EntregarInsumo.cshtml" />
+    <Content Include="Views\Insumo\VerInsumos.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <None Include="Views\Ordenes\Ordenes.cshtml" />
     <None Include="Views\Home\VerClientes.cshtml" />

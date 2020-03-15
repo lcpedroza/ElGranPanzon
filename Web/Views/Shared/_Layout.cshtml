@@ -30,7 +30,7 @@
                         if (empleadoLogueado.VerificarCualquierPermiso("CREAR_EMPLEADO", "VER_EMPLEADO")) {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Administrar
+                                    Administrar Empleados
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @{
@@ -41,11 +41,29 @@
 
                                     @Html.ActionLink("Crear Empleado", "CrearEmpleado", "Administrar", null, atributosDropdown)
                                     @Html.ActionLink("Ver Empleados", "VerEmpleados", "Administrar", null, atributosDropdown)
+                                    @Html.ActionLink("Agregar Insumos", "AgregarProducto", "Insumo", null, atributosDropdown)
                                 </div>
                             </li>
                         }
                     }
-
+                    @if (empleadoLogueado != null) {
+                        if (empleadoLogueado.VerificarCualquierPermiso("VER_INVENTARIO_I", "ENTREGAR_INSUMO")) {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Administrar Isnumos
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @{
+                                        var atributosDropdown = new Dictionary<string, object> {
+                                    {"class", "dropdown-item" }
+                                };
+                                    }
+                                    @Html.ActionLink("Entregar Insumos", "EntregarInsumo", "Insumo", null, atributosDropdown)
+                                    @Html.ActionLink("Ver Inventario de Insumos", "VerInsumos", "Insumo", null, atributosDropdown)
+                                </div>
+                            </li>
+                        }
+                    }
                     @{
                         var atributosNavLink = new Dictionary<string, object> {
                                     {"class", "nav-link" }
@@ -67,17 +85,16 @@
                             @Html.ActionLink("Iniciar Sesión", "IniciarSesion", "Login", null, atributosNavLink)
                         </li>
                     }
-                    @if (empleadoLogueado != null) {
-                        <li class="nav-item">
-                            @Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", null, atributosNavLink)
-                        </li>
-                    }
                     @if (empleadoLogueado != null && empleadoLogueado.VerificarPermiso(Permiso.RealizarCompra)) {
                         <li class="nav-item">
                             @Html.ActionLink("Realizar Pedido", "Pedidos", "Compras", null, atributosNavLink)
                         </li>
                     }
-
+                    @if (empleadoLogueado != null) {
+                        <li class="nav-item">
+                            @Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", null, atributosNavLink)
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

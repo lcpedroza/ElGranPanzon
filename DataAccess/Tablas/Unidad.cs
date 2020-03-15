@@ -12,28 +12,19 @@ namespace DataAccess.Tablas
     using System;
     using System.Collections.Generic;
     
-    public partial class Insumo
+    public partial class Unidad
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Insumo()
+        public Unidad()
         {
-            this.COMIDAINSUMOS = new HashSet<ComidaInsumo>();
-            this.INVENTARIOS = new HashSet<Inventario>();
+            this.INSUMOS = new HashSet<Insumo>();
         }
     
         public decimal Id { get; set; }
-        public string Nombre { get; set; }
-        public decimal CategoriaId { get; set; }
-        public string Marca { get; set; }
-        public string Proveedor { get; set; }
-        public decimal Precio { get; set; }
-        public decimal UnidadId { get; set; }
+        public string NombreLargo { get; set; }
+        public string NombreCorto { get; set; }
     
-        public virtual CategoriaInsumo CATEGORIASINSUMOS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ComidaInsumo> COMIDAINSUMOS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inventario> INVENTARIOS { get; set; }
-        public virtual Unidad UNIDADES { get; set; }
+        public virtual ICollection<Insumo> INSUMOS { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace Web.Controllers {
 
             return View();
         }
-        
+
         public ActionResult RegistrarEmpleado() {
             var empleadoLogueado = (Empleado)Session["empleado"];
 
@@ -38,7 +38,7 @@ namespace Web.Controllers {
                     GeneroId = Convert.ToInt32(Request.Form.Get("generos")),
                     TipoDocumentoId = Convert.ToInt32(Request.Form.Get("tiposdeDocumento")),
                     NumeroDocumento = Request.Form.Get("numeroDocumento"),
-        },
+                },
                 SedeId = empleadoLogueado.SedeId,
                 RolId = Convert.ToInt32(Request.Form.Get("roles")),
                 FechaContratacion = Convert.ToDateTime(Request.Form.Get("fechaContratacion")),
@@ -46,7 +46,7 @@ namespace Web.Controllers {
                 Salario = Convert.ToInt32(Request.Form.Get("salario")),
                 Correo = Request.Form.Get("correo"),
                 Clave = Request.Form.Get("clave")
-        };
+            };
 
 
             var empleadoDao = new EmpleadoDao(db);
@@ -62,7 +62,7 @@ namespace Web.Controllers {
             var roles = rolDao.GetRoles();
             var tipoDocumentoDao = new TipoDocumentoDao(db);
             var tiposDocumento = tipoDocumentoDao.GetTiposDeDocumento();
-          
+
             var empleadoDao = new EmpleadoDao(db);
             var empleados = empleadoDao.GetEmpleados();
 
@@ -74,7 +74,7 @@ namespace Web.Controllers {
         }
 
         public ActionResult EliminarEmpleado() {
-            var empleadoIdStr = Request.QueryString.Get("empleado"); 
+            var empleadoIdStr = Request.QueryString.Get("empleado");
             var empleadoId = empleadoIdStr == null ? null : new int?(Convert.ToInt32(empleadoIdStr));
             var empleadoDao = new EmpleadoDao(db);
             var empleado = empleadoDao.GetEmpleado(empleadoId);
@@ -87,35 +87,8 @@ namespace Web.Controllers {
         public ActionResult EditarEmpleado() {
 
             return View();
-           
-        }
-
-        public ActionResult CrearProducto()
-        {
-            var categoriaInsumoDao = new CategoriaInsumoDao(db);
-            var categoriasInsumo = categoriaInsumoDao.GetCategoriasInumo();
-            ViewBag.Categorias = categoriasInsumo;
-            return View();
 
         }
 
-        public ActionResult AgregarProducto() {
-            var empleadoLogueado = (Empleado)Session["empleado"];
-
-            var insumo = new Insumo();
-
-
-
-            insumo.Nombre = Request.Form.Get("Nombre");
-            insumo.Marca = Request.Form.Get("Marca");
-            insumo.CategoriaId = Convert.ToInt32(Request.Form.Get("categorias"));
-            insumo.Proveedor = Request.Form.Get("Provedor");
-            insumo.Precio = Convert.ToInt32(Request.Form.Get("Precio"));
-            
-            var insumoDao = new InsumoDao(db);
-            insumoDao.CrearInsumo(insumo);
-            Response.Redirect("/Home/Index");
-            return View();
-        }
     }
 }

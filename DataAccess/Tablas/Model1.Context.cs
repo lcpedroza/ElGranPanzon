@@ -41,5 +41,6 @@ namespace DataAccess.Tablas
         public virtual DbSet<Sede> Sedes { get; set; }
         public virtual DbSet<TipoDocumento> TiposDocumento { get; set; }
         public virtual DbSet<ComidaInsumo> ComidaInsumos { get; set; }
+        public virtual DbSet<Unidad> Unidades { get; set; }
     }
 }

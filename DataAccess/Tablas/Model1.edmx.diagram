@@ -39,6 +39,8 @@
         <AssociationConnector Association="Model.PERMISOSROLES" ManuallyRouted="false" />
         <AssociationConnector Association="Model.RELACIONDEROLES" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FACCLI" />
+        <EntityTypeShape EntityType="Model.Unidad" Width="1.5" PointX="5.75" PointY="17.875" />
+        <AssociationConnector Association="Model.INSUNI" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

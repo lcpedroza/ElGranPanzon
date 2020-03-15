@@ -13,7 +13,7 @@ namespace DataAccess.Dao {
             this.db = db;
         }
 
-        public List<Sede> GetRoles() {
+        public List<Sede> GetSedes() {
             return db.Sedes.ToList();
         }
     }

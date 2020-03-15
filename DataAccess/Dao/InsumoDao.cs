@@ -16,11 +16,12 @@ namespace DataAccess.Dao
             this.db = db;
         }
 
-        public Insumo CrearInsumo(Insumo i)
+        public List<Insumo> GetInsumos()
         {
-            db.Insumos.Add(i);
-            db.SaveChanges();
-            return i;
+            var consulta = from i in db.Insumos
+                         orderby i.Nombre ascending
+                         select i;
+            return consulta.ToList();
         }
     }
 }

@@ -99,10 +99,10 @@ advertencia 6002: La tabla o vista 'LUIS.COMIDAINSUMOS' no tiene definida ningun
           <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="CATEGORIAID" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="UNIDAD" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="MARCA" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="PROVEEDOR" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="PRECIO" Type="float" Precision="126" Scale="0" Nullable="false" />
+          <Property Name="UNIDADID" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="INVENTARIOS">
           <Key>
@@ -171,6 +171,14 @@ advertencia 6002: La tabla o vista 'LUIS.COMIDAINSUMOS' no tiene definida ningun
           </Key>
           <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRELARGO" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="NOMBRECORTO" Type="varchar2" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UNIDADES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRELARGO" Type="varchar2" MaxLength="10" Nullable="false" />
           <Property Name="NOMBRECORTO" Type="varchar2" MaxLength="4" Nullable="false" />
         </EntityType>
         <Association Name="CLIPER">
@@ -329,6 +337,18 @@ advertencia 6002: La tabla o vista 'LUIS.COMIDAINSUMOS' no tiene definida ningun
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="INSUNI">
+          <End Role="UNIDADES" Type="Self.UNIDADES" Multiplicity="1" />
+          <End Role="INSUMOS" Type="Self.INSUMOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDADES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INSUMOS">
+              <PropertyRef Name="UNIDADID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="INVINS">
           <End Role="INSUMOS" Type="Self.INSUMOS" Multiplicity="1" />
           <End Role="INVENTARIOS" Type="Self.INVENTARIOS" Multiplicity="*" />
@@ -431,6 +451,7 @@ advertencia 6002: La tabla o vista 'LUIS.COMIDAINSUMOS' no tiene definida ningun
           <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="LUIS" store:Type="Tables" />
           <EntitySet Name="SEDES" EntityType="Self.SEDES" Schema="LUIS" store:Type="Tables" />
           <EntitySet Name="TIPOSDOCUMENTO" EntityType="Self.TIPOSDOCUMENTO" Schema="LUIS" store:Type="Tables" />
+          <EntitySet Name="UNIDADES" EntityType="Self.UNIDADES" Schema="LUIS" store:Type="Tables" />
           <EntitySet Name="COMIDAINSUMOS" EntityType="Self.COMIDAINSUMOS" store:Type="Tables" store:Schema="LUIS">
             <DefiningQuery>SELECT 
 "COMIDAINSUMOS"."COMIDAID" AS "COMIDAID", 
@@ -489,6 +510,10 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
           <AssociationSet Name="FACSED" Association="Self.FACSED">
             <End Role="SEDES" EntitySet="SEDES" />
             <End Role="DETALLEFACTURAS" EntitySet="DETALLEFACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="INSUNI" Association="Self.INSUNI">
+            <End Role="UNIDADES" EntitySet="UNIDADES" />
+            <End Role="INSUMOS" EntitySet="INSUMOS" />
           </AssociationSet>
           <AssociationSet Name="INVINS" Association="Self.INVINS">
             <End Role="INSUMOS" EntitySet="INSUMOS" />
@@ -621,13 +646,14 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
           <Property Name="Id" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CategoriaId" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="Unidad" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Proveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Precio" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <NavigationProperty Name="CATEGORIASINSUMOS" Relationship="Self.PROCAT" FromRole="INSUMOS" ToRole="CATEGORIASINSUMOS" />
           <NavigationProperty Name="COMIDAINSUMOS" Relationship="Self.COMINSINS" FromRole="INSUMOS" ToRole="COMIDAINSUMOS" />
           <NavigationProperty Name="INVENTARIOS" Relationship="Self.INVINS" FromRole="INSUMOS" ToRole="INVENTARIOS" />
+          <Property Name="UnidadId" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="UNIDADES" Relationship="Model.INSUNI" FromRole="Insumo" ToRole="UNIDADES" />
         </EntityType>
         <EntityType Name="Inventario">
           <Key>
@@ -986,6 +1012,11 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
             <End Role="Cliente" EntitySet="Clientes" />
             <End Role="Factura" EntitySet="Facturas" />
           </AssociationSet>
+          <EntitySet Name="Unidades" EntityType="Model.Unidad" />
+          <AssociationSet Name="INSUNI" Association="Model.INSUNI">
+            <End Role="UNIDADES" EntitySet="Unidades" />
+            <End Role="Insumo" EntitySet="Insumos" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FACCLI">
           <End Type="Model.Cliente" Role="Cliente" Multiplicity="1" />
@@ -996,6 +1027,27 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
             </Principal>
             <Dependent Role="Factura">
               <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Unidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreLargo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCorto" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="INSUMOS" Relationship="Model.INSUNI" FromRole="UNIDADES" ToRole="Insumo" />
+        </EntityType>
+        <Association Name="INSUNI">
+          <End Type="Model.Unidad" Role="UNIDADES" Multiplicity="1" />
+          <End Type="Model.Insumo" Role="Insumo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDADES">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Insumo">
+              <PropertyRef Name="UnidadId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1091,10 +1143,10 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
           <EntitySetMapping Name="Insumos">
             <EntityTypeMapping TypeName="Model.Insumo">
               <MappingFragment StoreEntitySet="INSUMOS">
+                <ScalarProperty Name="UnidadId" ColumnName="UNIDADID" />
                 <ScalarProperty Name="Id" ColumnName="ID" />
                 <ScalarProperty Name="Nombre" ColumnName="NOMBRE" />
                 <ScalarProperty Name="CategoriaId" ColumnName="CATEGORIAID" />
-                <ScalarProperty Name="Unidad" ColumnName="UNIDAD" />
                 <ScalarProperty Name="Marca" ColumnName="MARCA" />
                 <ScalarProperty Name="Proveedor" ColumnName="PROVEEDOR" />
                 <ScalarProperty Name="Precio" ColumnName="PRECIO" />
@@ -1185,6 +1237,15 @@ FROM "LUIS"."COMIDAINSUMOS" "COMIDAINSUMOS"</DefiningQuery>
               <ScalarProperty Name="Id" ColumnName="ROLPADREID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Unidades">
+            <EntityTypeMapping TypeName="Model.Unidad">
+              <MappingFragment StoreEntitySet="UNIDADES">
+                <ScalarProperty Name="NombreCorto" ColumnName="NOMBRECORTO" />
+                <ScalarProperty Name="NombreLargo" ColumnName="NOMBRELARGO" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
