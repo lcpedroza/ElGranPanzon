@@ -86,6 +86,25 @@ namespace Web.Controllers {
 
         public ActionResult EditarEmpleado() {
 
+            var empleadoDao = new EmpleadoDao(db);
+            var empleadoId = Convert.ToInt32(Request.Form.Get("empleadoId"));
+            var empleado = empleadoDao.GetEmpleado(empleadoId);
+
+            
+            empleado.PERSONAS.Nombres = Request.Form.Get("Nombres");
+            empleado.PERSONAS.Apellidos = Request.Form.Get("Apellidos");
+            empleado.PERSONAS.GeneroId = Convert.ToInt32(Request.Form.Get("generos"));
+            empleado.PERSONAS.TipoDocumentoId = Convert.ToInt32(Request.Form.Get("tiposdeDocumento"));
+            empleado.PERSONAS.NumeroDocumento = Request.Form.Get("numeroDocumento");
+
+            empleado.RolId = Convert.ToInt32(Request.Form.Get("roles"));
+            empleado.Telefono = Request.Form.Get("telefono");
+            empleado.Salario = Convert.ToInt32(Request.Form.Get("salario"));
+            empleado.Correo = Request.Form.Get("correo");
+            empleado.Clave = Request.Form.Get("clave");
+
+            empleadoDao.EditarEmpleado(empleado);
+            Response.Redirect("/Administrar/VerEmpleados");
             return View();
 
         }

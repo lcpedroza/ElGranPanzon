@@ -11,6 +11,7 @@ namespace Web.Controllers {
         private Entidades db;
         public HomeController() {
             db = new Entidades();
+
         }
         public ActionResult Index() {
             return View();

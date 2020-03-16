@@ -29,7 +29,6 @@ namespace DataAccess.Dao {
             return empleado;
         }
         public Empleado EditarEmpleado(Empleado empleado) {
-            empleado.FechaCreacion = DateTime.Now;
             db.SaveChanges();
             return empleado;
         }

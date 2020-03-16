@@ -17,7 +17,6 @@ namespace Negocio.Modelo {
             Salario = empleado.Salario;
             RolId = empleado.RolId;
             Correo = empleado.Correo;
-            Clave = empleado.Clave;
             Telefono = empleado.Telefono;
             SedeId = empleado.SedeId;
             Sede = new Sede(empleado.SEDES);
@@ -31,7 +30,6 @@ namespace Negocio.Modelo {
         public decimal Salario { get; set; }
         public decimal RolId { get; set; }
         public string Correo { get; set; }
-        public string Clave { get; set; }
         public string Telefono { get; set; }
         public decimal SedeId { get; set; }
 
@@ -48,7 +46,6 @@ namespace Negocio.Modelo {
             Salario = Salario,
             RolId = RolId,
             Correo = Correo,
-            Clave = Clave,
             Telefono = Telefono,
             SedeId = SedeId,
         };

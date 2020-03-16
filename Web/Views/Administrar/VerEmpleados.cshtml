@@ -83,81 +83,81 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <form class="col-sm-10 col-md-12" action="@Url.Action("RegistrarEmpleado", "Administrar")" method="post">
-                            <div class="row">
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="primer-nombre">Nombres</label>
-                                    <input type="text" required name="Nombres" class="form-control" id="Nombres">
-                                </div>
+            <form action="@Url.Action("EditarEmpleado", "Administrar")" method="post">
+                <div class="modal-body">
+                    <div class="col-sm-10 col-md-12">
+                        <div class="container">
+                            <div class="row justify-content-center">
 
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="apellidos">Apellidos</label>
-                                    <input type="text" required name="Apellidos" class="form-control" id="Apellidos">
-                                </div>
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="genero">Género</label>
-                                    @{ var generos = (List<Genero>)ViewBag.Generos; }
-                                    <select class="custom-select" required name="generos">
-                                        @foreach (var genero in generos) {
-                                            <option value="@genero.Id">@genero.Nombre</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="tipoDoc">Tipo de Documento</label>
-                                    @{ var tiposDocumento = (List<TipoDocumento>)ViewBag.TiposDocumento; }
-                                    <select class="custom-select" required name="tiposdeDocumento">
-                                        @foreach (var tipoDocumento in tiposDocumento) {
-                                            <option value="@tipoDocumento.Id">@tipoDocumento.NombreLargo</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="rol">Cargo</label>
-                                    @{ var roles = (List<Rol>)ViewBag.Roles; }
-                                    <select class="custom-select" required name="roles">
-                                        @foreach (var rol in roles) {
-                                            <option value="@rol.Id">@rol.Nombre</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="telefono">Número de Documento</label>
-                                    <input type="number" required name="numeroDocumento" class="form-control" id="numDoc">
-                                </div>
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="telefono">F.Contratación</label>
-                                    <input type="date" required name="fechaContratacion" class="form-control" id="telefono">
-                                </div>
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="telefono">Teléfono</label>
-                                    <input type="text" required name="telefono" class="form-control" id="telefono">
-                                </div>
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="telefono">Salario</label>
-                                    <input type="number" required name="salario" class="form-control" id="telefono">
-                                </div>
+                                <div class="row">
+                                    <input type="hidden" name="empleadoId" id="empleadoId">
+                                    <div class="form-group col-sm-12 col-md-6">
+                                        <label for="primer-nombre">Nombres</label>
+                                        <input type="text" required name="Nombres" class="form-control" id="Nombres">
+                                    </div>
 
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="exampleInputEmail1">Correo Electrónico</label>
-                                    <input type="email" required name="correo" class="form-control" id="exampleInputEmail1">
-                                </div>
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label for="exampleInputEmail1">Contraseña</label>
-                                    <input type="password" required name="clave" class="form-control" id="exampleInputEmail1">
+                                    <div class="form-group col-sm-12 col-md-6">
+                                        <label for="apellidos">Apellidos</label>
+                                        <input type="text" required name="Apellidos" class="form-control" id="Apellidos">
+                                    </div>
+                                    <div class="form-group col-sm-12 col-md-6">
+                                        <label for="genero">Género</label>
+                                        @{ var generos = (List<Genero>)ViewBag.Generos; }
+                                        <select class="custom-select" id="genero" required name="generos">
+                                            @foreach (var genero in generos) {
+                                                <option value="@genero.Id">@genero.Nombre</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-12 col-md-6">
+                                        <label for="tipoDoc">Tipo de Documento</label>
+                                        @{ var tiposDocumento = (List<TipoDocumento>)ViewBag.TiposDocumento; }
+                                        <select class="custom-select" id="td" required name="tiposdeDocumento">
+                                            @foreach (var tipoDocumento in tiposDocumento) {
+                                                <option value="@tipoDocumento.Id">@tipoDocumento.NombreLargo</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-12 col-md-6">
+                                        <label for="rol">Cargo</label>
+                                        @{ var roles = (List<Rol>)ViewBag.Roles; }
+                                        <select class="custom-select" id="cargo" required name="roles">
+                                            @foreach (var rol in roles) {
+                                                <option value="@rol.Id">@rol.Nombre</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-12 col-md-6">
+                                        <label for="telefono">Número de Documento</label>
+                                        <input type="number" required name="numeroDocumento" class="form-control" id="numDoc">
+                                    </div>
+                                    <div class="form-group col-sm-12 col-md-6">
+                                        <label for="telefono">Teléfono</label>
+                                        <input type="text" required name="telefono" class="form-control" id="telefono">
+                                    </div>
+                                    <div class="form-group col-sm-12 col-md-6">
+                                        <label for="telefono">Salario</label>
+                                        <input type="number" required name="salario" class="form-control" id="salario">
+                                    </div>
+
+                                    <div class="form-group col-sm-12 col-md-6">
+                                        <label for="exampleInputEmail1">Correo Electrónico</label>
+                                        <input type="email" required name="correo" class="form-control" id="Email">
+                                    </div>
+                                    <div class="form-group col-sm-12 col-md-6">
+                                        <label for="exampleInputEmail1">Contraseña</label>
+                                        <input type="password" required name="clave" class="form-control" id="exampleInputEmail1">
+                                    </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Guardar Cambios</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -171,6 +171,7 @@
         }
         var jsonEmpleados = Newtonsoft.Json.JsonConvert.SerializeObject(empleados2);
     }
-    var jsonEmpleados = @jsonEmpleados;
+    var jsonEmpleados = "@jsonEmpleados";
+    jsonEmpleados = jsonEmpleados.replace(/&quot;/g, '"');
     var empleados = JSON.parse(jsonEmpleados);
 </script>
