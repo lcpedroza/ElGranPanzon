@@ -14,5 +14,10 @@ namespace DataAccess.Tablas {
             
             return INVENTARIOS.Where(i=>i.SedeId == s.Id).Select(i => i.MovimientoCantidad).Sum();
         }
+
+        public decimal GetCantidadGeneral() {
+
+            return INVENTARIOS.Select(i => i.MovimientoCantidad).Sum();
+        }
     }
 }

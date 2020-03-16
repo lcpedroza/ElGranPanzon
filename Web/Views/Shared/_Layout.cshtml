@@ -78,6 +78,11 @@
                             @Html.ActionLink("Iniciar Sesión", "IniciarSesion", "Login", null, atributosNavLink)
                         </li>
                     }
+                    @if (empleadoLogueado != null && empleadoLogueado.VerificarPermiso(Permiso.VerInventarioGeneral)) {
+                        <li class="nav-item">
+                            @Html.ActionLink("Ver Inventario General", "VerInventarioGeneral", "Insumo", null, atributosNavLink)
+                        </li>
+                    }
                     @if (empleadoLogueado != null && empleadoLogueado.VerificarCualquierPermiso("VER_INVENTARIO_C", "REALIZAR_VENTA")) {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

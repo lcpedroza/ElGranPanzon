@@ -1,0 +1,43 @@
+﻿@using DataAccess.Tablas;
+
+@{
+    ViewBag.Title = "VerInsumos";
+}
+
+<div class="row justify-content-center">
+    <div class="col-sm-12 col-md-10">
+        <h2>Lista de insumos</h2>
+        <table class="table table-sm table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Proveedor</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad Existente</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{var insumos = (List
+                  <Insumo>
+                      )ViewBag.Insumos; }
+                @foreach (var insumo in insumos) {
+                    var empleadoLogueado = (Empleado)Session["empleado"];
+                    <tr>
+                        <td>@insumo.Id</td>
+                        <td>@insumo.Nombre</td>
+                        <td>@insumo.CATEGORIASINSUMOS.Nombre</td>
+                        <td>@insumo.Marca</td>
+                        <td>@insumo.Proveedor</td>
+                        <td>@insumo.Precio</td>
+                        <td>@insumo.GetCantidadGeneral()@insumo.UNIDADES.NombreCorto</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

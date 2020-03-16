@@ -45,6 +45,15 @@ namespace Web.Controllers
             ViewBag.Insumos = insumos;
             return View();
         }
+
+        public ActionResult VerInventarioGeneral() {
+
+            var insumoDao = new InsumoDao(db);
+            var insumos = insumoDao.GetInsumos();
+
+            ViewBag.Insumos = insumos;
+            return View();
+        }
         public ActionResult EntregarInsumo() {
             var insumoDao = new InsumoDao(db);
             var insumos = insumoDao.GetInsumos();
