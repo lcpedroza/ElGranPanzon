@@ -2,9 +2,6 @@
 @{
 
     var empleadoLogueado = (DataAccess.Tablas.Empleado)Session["empleado"];
-     var atributosDropdown = new Dictionary<string, object> {
-                                    {"class", "dropdown-item" }
-                                    };
 }
 
 <!DOCTYPE html>
@@ -22,9 +19,8 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/">El Gran Panzón</a>
+            <a class="navbar-brand js-scroll-trigger" href="/"> <span class="icon-home"></span> El Gran Panzón</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
@@ -33,12 +29,18 @@
                         if (empleadoLogueado.VerificarCualquierPermiso("CREAR_EMPLEADO", "VER_EMPLEADO")) {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Administrar Empleados
+                                    <span class="icon-user"></span>  Administrar Empleados
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @Html.ActionLink("Crear Empleado", "CrearEmpleado", "Administrar", null, atributosDropdown)
-                                    @Html.ActionLink("Ver Empleados", "VerEmpleados", "Administrar", null, atributosDropdown)
-                                    @Html.ActionLink("Agregar Insumos", "AgregarProducto", "Insumo", null, atributosDropdown)
+                                    <a class="dropdown-item" href="@Url.Action("CrearEmpleado", "Administrar")">
+                                        <span class='icon-user-plus'></span> Crear Empleado
+                                    </a>
+                                    <a class="dropdown-item" href="@Url.Action("VerEmpleados", "Administrar")">
+                                        <span class='icon-users'></span> Ver Empleados
+                                    </a>
+                                    <a class="dropdown-item" href="@Url.Action("AgregarProducto", "Insumo")">
+                                        <span class='icon-plus'></span> Agregar Insumos
+                                    </a>
                                 </div>
                             </li>
                         }
@@ -47,57 +49,66 @@
                         if (empleadoLogueado.VerificarCualquierPermiso("VER_INVENTARIO_I", "ENTREGAR_INSUMO")) {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Administrar Isnumos
+                                    <span class="icon-appleinc"></span> Administrar Isnumos
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @Html.ActionLink("Entregar Insumos", "EntregarInsumo", "Insumo", null, atributosDropdown)
-                                    @Html.ActionLink("Ver Inventario de Insumos", "VerInsumos", "Insumo", null, atributosDropdown)
+                                    <a class="dropdown-item" href="@Url.Action("EntregarInsumo", "Insumo")">
+                                        <span class='icon-minus'></span> Entregar Insumos
+                                    </a>
+                                    <a class="dropdown-item" href="@Url.Action("VerInsumos", "Insumo")">
+                                        <span class='icon-list-numbered'></span> Ver Inventario de Insumos
+                                    </a>
                                 </div>
                             </li>
                         }
                     }
-                    @{
-                        var atributosNavLink = new Dictionary<string, object> {
-                                    {"class", "nav-link" }
-                        };
-                    }
                     @if (empleadoLogueado == null) {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Contactos
+                                <span class="icon-address-book"></span> Contactos
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Teléfono: 3004255615</a>
-                                <a class="dropdown-item" href="#">Correo: elgranpanzon@gmail.com</a>
-                                <a class="dropdown-item" href="#">Dirección: Cra 50 #128 - 38</a>
+                                <a class="dropdown-item" href="#"><span class="icon-phone"></span> Teléfono: 3004255615</a>
+                                <a class="dropdown-item" href="#"><span class="icon-mail4"></span> Correo: elgranpanzon@gmail.com</a>
+                                <a class="dropdown-item" href="#"><span class="icon-location"></span> Dirección: Cra 50 #128 - 38</a>
                             </div>
                         </li>
                     }
                     @if (empleadoLogueado == null) {
                         <li class="nav-item">
-                            @Html.ActionLink("Iniciar Sesión", "IniciarSesion", "Login", null, atributosNavLink)
+                            <a class="nav-link" href="@Url.Action("IniciarSesion", "Login")">
+                                <span class='icon-enter'></span> Iniciar Sesión
+                            </a>
                         </li>
                     }
                     @if (empleadoLogueado != null && empleadoLogueado.VerificarPermiso(Permiso.VerInventarioGeneral)) {
                         <li class="nav-item">
-                            @Html.ActionLink("Ver Inventario General", "VerInventarioGeneral", "Insumo", null, atributosNavLink)
+                            <a class="nav-link" href="@Url.Action("VerInventarioGeneral", "Insumo")">
+                                <span class='icon-list-numbered'></span> Ver Inventario General
+                            </a>
                         </li>
                     }
                     @if (empleadoLogueado != null && empleadoLogueado.VerificarCualquierPermiso("VER_INVENTARIO_C", "REALIZAR_VENTA")) {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Compras
+                                <span class='icon-price-tag'></span> Compras
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @Html.ActionLink("Realizar Pedido", "Pedidos", "Compras", null, atributosDropdown)
-                                @Html.ActionLink("Ver Historial de Ventas", "VerHistorial", "Compras", null, atributosDropdown)
+                                <a class="dropdown-item" href="@Url.Action("Pedidos", "Compras")">
+                                    <span class='icon-cart'></span> Realizar Pedido
+                                </a>
+                                <a class="dropdown-item" href="@Url.Action("VerHistorial", "Compras")">
+                                    <span class='icon-stats-dots'></span> Ver Historial de Ventas
+                                </a>
                             </div>
                         </li>
 
                     }
                     @if (empleadoLogueado != null) {
                         <li class="nav-item">
-                            @Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", null, atributosNavLink)
+                            <a class="nav-link" href="@Url.Action("CerrarSesion", "Login")">
+                                <span class='icon-exit'></span> "Cerrar Sesión"
+                            </a>
                         </li>
                     }
                 </ul>

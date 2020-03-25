@@ -5,23 +5,23 @@
 
 
 <div class="container">
-    <h1>Restaurante El Gran Panzón</h1>
+    <h1 class="color-blanco" >Restaurante El Gran Panzón</h1>
 
     <div class="row justify-content-center">
         <form class="col-sm-10 col-md-6" action="@Url.Action("RegistrarEmpleado", "Administrar")" method="post">
-            <h3>Crear empleado</h3>
+            <h3 class="color-blanco">Crear empleado</h3>
             <div class="row">
                 <div class="form-group col-sm-12 col-md-6">
-                    <label for="primer-nombre">Nombres</label>
+                    <label class="color-blanco" for="primer-nombre">Nombres</label>
                     <input type="text" required name="Nombres" class="form-control" id="PrimerNombre" placeholder="Nombres">
                 </div>
 
                 <div class="form-group col-sm-12 col-md-6">
-                    <label for="apellidos">Apellidos</label>
+                    <label class="color-blanco" for="apellidos">Apellidos</label>
                     <input type="text" required name="Apellidos" class="form-control" id="Apellidos" placeholder="Apellidos">
                 </div>
                 <div class="form-group col-sm-12 col-md-6">
-                    <label for="genero">Género</label>
+                    <label class="color-blanco" for="genero">Género</label>
                     @{ var generos = (List<Genero>)ViewBag.Generos; }
                     <select class="custom-select" required name="generos">
                         <option value="">Seleccione un género</option>
@@ -31,7 +31,7 @@
                     </select>
                 </div>
                 <div class="form-group col-sm-12 col-md-6">
-                    <label for="tipoDoc">Tipo de Documento</label>
+                    <label class="color-blanco" for="tipoDoc">Tipo de Documento</label>
                     @{ var tiposDocumento = (List<TipoDocumento>)ViewBag.TiposDocumento; }
                 <select class="custom-select" required name="tiposdeDocumento">
                     <option value="">Seleccione un tipo de documento</option>
@@ -41,7 +41,7 @@
                 </select>
                 </div>
                 <div class="form-group col-sm-12 col-md-6">
-                    <label for="rol">Cargo</label>
+                    <label class="color-blanco" for="rol">Cargo</label>
                     @{ var roles = (List<Rol>)ViewBag.Roles; }
                 <select class="custom-select" required name="roles">
                     <option value="">Seleccione un cargo</option>
@@ -51,28 +51,28 @@
                 </select>
                 </div>
                 <div class="form-group col-sm-12 col-md-6">
-                    <label for="telefono">Número de Documento</label>
+                    <label class="color-blanco" for="telefono">Número de Documento</label>
                     <input type="number" required name="numeroDocumento" class="form-control" id="numDoc" placeholder="Número de Documento">
                 </div>
                 <div class="form-group col-sm-12 col-md-6">
-                    <label for="telefono">Fecha de Contratación</label>
+                    <label class="color-blanco" for="telefono">Fecha de Contratación</label>
                     <input type="date" required name="fechaContratacion" class="form-control" id="telefono" placeholder="Fecha de contratación">
                 </div>
                 <div class="form-group col-sm-12 col-md-6">
-                    <label for="telefono">Teléfono</label>
+                    <label class="color-blanco" for="telefono">Teléfono</label>
                     <input type="text" required name="telefono" class="form-control" id="telefono" placeholder="Teléfono">
                 </div>
                 <div class="form-group col-sm-12 col-md-6">
-                    <label for="telefono">Salario</label>
+                    <label class="color-blanco" for="telefono">Salario</label>
                     <input type="number" required name="salario" class="form-control" id="telefono" placeholder="Salario">
                 </div>
 
                 <div class="form-group col-sm-12 col-md-6">
-                    <label for="exampleInputEmail1">Correo Electrónico</label>
+                    <label class="color-blanco" for="exampleInputEmail1">Correo Electrónico</label>
                     <input type="email" required name="correo" class="form-control" id="exampleInputEmail1" placeholder="Correo Electrónico">
                 </div>
-                <div class="form-group col-sm-12 col-md-6">
-                    <label for="exampleInputEmail1">Contraseña</label>
+                <div class="form-group col-sm-12 col-md-6 offset-3">
+                    <label class="color-blanco" for="exampleInputEmail1">Contraseña</label>
                     <input type="password" required name="clave" class="form-control" id="exampleInputEmail1" placeholder="Cotraseña">
                 </div>
             </div>

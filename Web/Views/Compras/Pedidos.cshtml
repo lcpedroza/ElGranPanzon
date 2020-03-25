@@ -4,7 +4,6 @@
     ViewBag.Title = "Pedidos";
 }
 
-<h2>Pedidos</h2>
 @if (TempData["Mensaje"] != null) {
     <div class="alert alert-success" role="alert">
         @TempData["Mensaje"]
@@ -13,7 +12,7 @@
 <form action="@Url.Action("Pedidos", "Compras")" method="post">
     <div class="row justify-content-center">
         <div class="form-group col-sm-12 col-md-4">
-            <label for="genero">Categorías</label>
+            <label class="color-blanco" for="genero">Categorías</label>
             @{ var categoriasComida = (List<CategoriaComida>)ViewBag.CategoriasComidas; }
             <select class="custom-select" required name="categorias">
                 @foreach (var categoriaComida in categoriasComida) {
@@ -57,7 +56,7 @@
     </div>
 </div>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#carrito">
-    Ir al carrito de compras
+    <span class="icon-cart"></span> Ir al carrito de compras 
 </button>
 
 

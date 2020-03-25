@@ -25,7 +25,7 @@ namespace Web {
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/creative.css", "~/Content/creative.min.css",
-                      "~/Content/formulario.css", "~/Content/magnific-popup.css", "~/Content/Site.css"));
+                      "~/Content/formulario.css", "~/Content/magnific-popup.css", "~/Content/Site.css", "~/Content/Iconos/fonts/style.css"));
         }
     }
 }
