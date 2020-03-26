@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Factura ID="145">
+  <Encabezado>
+    <FechaCompra>2020-03-26T04:48:23.7451657-05:00</FechaCompra>
+    <Total>42500</Total>
+  </Encabezado>
+  <Empresa>
+    <Nombre>El Gran Panzón</Nombre>
+    <Direccion>Cra 50 #128 - 38</Direccion>
+    <Ciudad>Bogotá</Ciudad>
+    <NIT>15448384</NIT>
+  </Empresa>
+  <Cliente>
+    <Nombre>Olmedo  Pedroza Barrios</Nombre>
+    <Identificacion>7594394</Identificacion>
+  </Cliente>
+  <Detalles>
+    <Detalle>
+      <Producto>Hamburguesa Especial</Producto>
+      <Cantidad>2</Cantidad>
+      <Precio>20000</Precio>
+    </Detalle>
+    <Detalle>
+      <Producto>Jugo Hit 300 ml</Producto>
+      <Cantidad>1</Cantidad>
+      <Precio>2500</Precio>
+    </Detalle>
+  </Detalles>
+</Factura>

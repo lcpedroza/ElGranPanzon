@@ -70,6 +70,8 @@ namespace Web.Controllers {
             var factura = (Factura)Session["factura"];
             var facturaDao = new FacturaDao(db);
             facturaDao.crearFactura(factura);
+            var xml = factura.CrearDocumentoXML();
+            xml.Save("C:/Users/user/source/repos/ElGranPanzon/Web/Facturas XML/factura" + factura.Id + ".xml");
 
             Response.Redirect("/Compras/Pedidos");
             TempData["Mensaje"] = "La compra se ha relizado exitosamente";

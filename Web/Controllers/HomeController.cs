@@ -13,7 +13,7 @@ namespace Web.Controllers {
             db = new Entidades();
 
         }
-        public ActionResult Index() {
+        public ActionResult Index() {   
             return View();
         }
         

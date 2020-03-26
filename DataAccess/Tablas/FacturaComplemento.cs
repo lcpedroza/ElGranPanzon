@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace DataAccess.Tablas {
     public partial class Factura {
@@ -14,6 +15,40 @@ namespace DataAccess.Tablas {
                 total += detalleFactura.Subtotal;
             }
             return total;
+        }
+
+        public XDocument CrearDocumentoXML() {
+            var detalles = new List<XElement>();
+            foreach (var df in DETALLEFACTURAS) {
+                detalles.Add(
+                    new XElement("Detalle", 
+                        new XElement("Producto", df.COMIDAS.Nombre), 
+                        new XElement("Cantidad", df.Cantidad), 
+                        new XElement("Precio", df.Precio)));
+            }
+
+            XDocument miXML = new XDocument(
+                new XDeclaration("1.0", "utf-8", "yes"),
+                new XElement("Factura",
+                                        new XAttribute("ID", Id),
+                                       new XElement("Encabezado",
+                                            new XElement("FechaCompra", FechaCreacion),
+                                            new XElement("Total", TotalCompra())),
+
+                                       new XElement("Empresa",
+                                            new XElement("Nombre", "El Gran Panzón"),
+                                            new XElement("Direccion", "Cra 50 #128 - 38"),
+                                            new XElement("Ciudad", "Bogotá"),
+                                            new XElement("NIT", "15448384")),
+
+                                       new XElement("Cliente",
+                                            new XElement("Nombre", CLIENTES.PERSONAS.Nombres + " " + CLIENTES.PERSONAS.Apellidos),
+                                            new XElement("Identificacion", CLIENTES.PERSONAS.NumeroDocumento)),
+                                       new XElement("Detalles", detalles)
+                            )
+                );
+
+            return miXML;
         }
     }
 }

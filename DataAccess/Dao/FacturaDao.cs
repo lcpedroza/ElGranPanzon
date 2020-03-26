@@ -26,9 +26,11 @@ namespace DataAccess.Dao {
                 };
                 detallesFacturas.Add(detalleFactura);
             }
-        
+
+            factura.FechaCreacion = DateTime.Now;
+
             var f = new Factura {
-                FechaCreacion = DateTime.Now,
+                FechaCreacion = factura.FechaCreacion,
                 ClienteId = factura.CLIENTES.Id,
                 Total = factura.Total,
                 SedeId = factura.SEDES.Id,
@@ -37,6 +39,7 @@ namespace DataAccess.Dao {
 
             db.Facturas.Add(f);
             db.SaveChanges();
+            factura.Id = f.Id;
             return f;
         }
 
