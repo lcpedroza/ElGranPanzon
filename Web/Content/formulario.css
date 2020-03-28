@@ -34,3 +34,15 @@ section table{
 .color-blanco{
     color: white;
 }
+
+#ir-al-carrito {
+    margin-bottom: 10px;
+}
+
+.tarjeta-comida {
+    margin-bottom: 30px;
+}
+
+#cb-categorias {
+    margin-bottom: 20px;
+}
