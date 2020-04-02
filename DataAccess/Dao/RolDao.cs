@@ -13,6 +13,10 @@ namespace DataAccess.Dao {
             this.db = db;
         }
 
+        /*
+         * Autor: Luis Carlos Pedroza Pineda
+         * Método que retorna una lista de roles
+         */
         public List<Rol> GetRoles() {
             return db.Roles.ToList();
         }

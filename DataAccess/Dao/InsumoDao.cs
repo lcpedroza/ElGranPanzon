@@ -16,6 +16,10 @@ namespace DataAccess.Dao
             this.db = db;
         }
 
+        /*
+         * Autor: Juan Miguel Castro Rojas
+         * Método que retorna una lista de insumos y la ordena de forma ascendente
+         */
         public List<Insumo> GetInsumos()
         {
             var consulta = from i in db.Insumos

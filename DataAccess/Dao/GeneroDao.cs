@@ -12,7 +12,10 @@ namespace DataAccess.Dao {
         public GeneroDao(Entidades db) {
             this.db = db;
         }
-
+        /*
+         * Autor: Luis Carlos Pedroza Pineda
+         * Método que retorna una lista de géneros
+         */
         public List<Genero> GetGeneros() {
             return db.Generos.ToList();
         }

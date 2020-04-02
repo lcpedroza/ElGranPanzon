@@ -128,7 +128,6 @@
     <Compile Include="Tablas\Persona.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Tablas\PersonaComplemento.cs" />
     <Compile Include="Tablas\Rol.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

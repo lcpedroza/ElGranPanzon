@@ -43,6 +43,11 @@ namespace DataAccess.Dao {
             return f;
         }
 
+        /*
+         * Autor: Juan Miguel Castro Rojas
+         * Método que muestra una lista de facturas filtrada por sede y la ordena por 
+         * fecha de creación de forma descendente
+         */
         public List<Factura> GetFacturas(Sede s) {
             var consulta = from f in db.Facturas
                            orderby f.FechaCreacion descending

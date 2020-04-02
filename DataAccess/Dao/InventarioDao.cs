@@ -13,6 +13,10 @@ namespace DataAccess.Dao {
             this.db = db;
         }
 
+        /*
+         * Autor: Juan Miguel Castro Rojas
+         * Método que crea un inventario
+         */
         public Inventario CrearInventario(Inventario i) {
 
             var inventario = new Inventario {

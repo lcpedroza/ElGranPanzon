@@ -12,7 +12,11 @@ namespace DataAccess.Dao {
         public TipoDocumentoDao(Entidades db) {
             this.db = db;
         }
-      
+
+        /*
+         * Autor: Luis Carlos Pedroza Pineda
+         * Método que retorna una lista de tipos de documento
+         */
         public List<TipoDocumento> GetTiposDeDocumento() {
             return db.TiposDocumento.ToList();
         }

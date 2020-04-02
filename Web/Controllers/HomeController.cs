@@ -22,7 +22,8 @@ namespace Web.Controllers {
 
             return View();
         }
-
+        /*
+         */
         public ActionResult CrearCliente() 
         {
             var generoDao = new GeneroDao(db);

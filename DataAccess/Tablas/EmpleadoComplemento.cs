@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Tablas {
     public partial class Empleado {
+
+        /*
+         * Autor: Luis Carlos Pedroza Pineda
+         * Método que permite verificar un permiso
+         */
         public bool VerificarPermiso(string codigoPermiso) {
             foreach (var p in ROLES.PERMISOS) {
                 if (p.Codigo == codigoPermiso) {
@@ -15,6 +20,10 @@ namespace DataAccess.Tablas {
             return false;
         }
 
+        /*
+         * Autor: Luis Carlos Pedroza Pineda
+         * Método que permite verificar varios permisos
+         */
         public bool VerificarCualquierPermiso(params string[] codigos) {
             foreach (var c in codigos) {
                 if (VerificarPermiso(c)) {

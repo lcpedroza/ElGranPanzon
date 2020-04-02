@@ -13,6 +13,10 @@ namespace DataAccess.Dao {
             this.db = db;
         }
 
+        /*
+        * Autor: Juan Miguel Castro Rojas
+        * Método que retorna una lista de categorías de comidas
+        */
         public List<CategoriaComida> GetCategoriasComida() {
             return db.CategoriasComidas.ToList();
         }

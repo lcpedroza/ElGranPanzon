@@ -7,6 +7,12 @@ using System.Xml.Linq;
 
 namespace DataAccess.Tablas {
     public partial class Factura {
+
+        /*
+         * Autor: Juan Miguel Castro Rojas
+         * Método que permite calcular el total de una compra recorriendo una lista
+         * de detalles de factura y sumando estas mismas
+         */
         public decimal TotalCompra() {
 
             decimal total = 0;
@@ -17,6 +23,10 @@ namespace DataAccess.Tablas {
             return total;
         }
 
+        /*
+      * Autor: luis Carlos Pedroza Pineda
+      * Método que permite crear un XML de la factura
+      */
         public XDocument CrearDocumentoXML() {
             var detalles = new List<XElement>();
             foreach (var df in DETALLEFACTURAS) {
