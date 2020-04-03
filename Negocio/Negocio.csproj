@@ -68,6 +68,7 @@
     <Compile Include="Modelo\Sede.cs" />
     <Compile Include="Modelo\TipoDocumento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request\EditarEmpleadoRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

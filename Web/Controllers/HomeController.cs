@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace Web.Controllers {
+    
     public class HomeController : Controller {
         private Entidades db;
         public HomeController() {

@@ -100,7 +100,7 @@
                                     <div class="form-group col-sm-12 col-md-6">
                                         <label for="genero">Género</label>
                                         @{ var generos = (List<Genero>)ViewBag.Generos; }
-                                        <select class="custom-select" id="genero" required name="generos">
+                                        <select class="custom-select" id="genero" required name="GeneroId">
                                             @foreach (var genero in generos) {
                                                 <option value="@genero.Id">@genero.Nombre</option>
                                             }
@@ -109,7 +109,7 @@
                                     <div class="form-group col-sm-12 col-md-6">
                                         <label for="tipoDoc">Tipo de Documento</label>
                                         @{ var tiposDocumento = (List<TipoDocumento>)ViewBag.TiposDocumento; }
-                                        <select class="custom-select" id="td" required name="tiposdeDocumento">
+                                        <select class="custom-select" id="td" required name="TiposdeDocumentoId">
                                             @foreach (var tipoDocumento in tiposDocumento) {
                                                 <option value="@tipoDocumento.Id">@tipoDocumento.NombreLargo</option>
                                             }
@@ -118,7 +118,7 @@
                                     <div class="form-group col-sm-12 col-md-6">
                                         <label for="rol">Cargo</label>
                                         @{ var roles = (List<Rol>)ViewBag.Roles; }
-                                        <select class="custom-select" id="cargo" required name="roles">
+                                        <select class="custom-select" id="cargo" required name="RolId">
                                             @foreach (var rol in roles) {
                                                 <option value="@rol.Id">@rol.Nombre</option>
                                             }
@@ -143,7 +143,7 @@
                                     </div>
                                     <div class="form-group col-sm-12 col-md-6">
                                         <label for="exampleInputEmail1">Contraseña</label>
-                                        <input type="password" required name="clave" class="form-control" id="exampleInputEmail1">
+                                        <input type="password" required name="clave" class="form-control" id="clave">
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="button" id="Boton-EditarEmpleado" class="btn btn-primary">Guardar Cambios</button>
                 </div>
             </form>
         </div>
